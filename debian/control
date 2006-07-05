@@ -1,0 +1,21 @@
+Source: nkf
+Section: text
+Priority: optional
+Build-Depends: debhelper, perl (>= 5.8.0)
+Maintainer: NOKUBI Takatsugu <knok@daionet.gr.jp>
+Standards-Version: 3.6.0
+
+Package: nkf
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Network Kanji code conversion Filter
+ Nkf is yet another kanji code converter among networks,
+ hosts and terminals. It converts input kanji code to designated
+ kanji code such as 7-bit JIS, MS-kanji (Shifted-JIS) or EUC.
+
+Package: libnkf-perl
+Architecture: any
+Depends: ${shlibs:Depends}, ${perl:Depends}
+Description: Network Kanji code conversion Filter for Perl
+ libnkf-perl will let you use the nkf (Network Kanji code conversion
+ filter) as NKF.pm from Perl programs.

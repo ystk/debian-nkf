@@ -1,0 +1,177 @@
+nkf (2.07-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Wed,  5 Jul 2006 01:32:45 +0000
+
+nkf (2.06-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Tue, 28 Mar 2006 06:30:04 +0000
+
+nkf (2.05-2) unstable; urgency=low
+
+  * Fixed -g option with multiple files.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Sat, 27 Aug 2005 16:15:34 +0000
+
+nkf (2.05-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Thu, 30 Jun 2005 17:28:10 +0900
+
+nkf (2.04-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Sat,  3 Jan 2004 16:28:08 +0900
+
+nkf (2.03-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Thu,  2 Oct 2003 15:22:51 +0900
+
+nkf (2.02-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Sun,  3 Aug 2003 17:54:19 +0900
+
+nkf (2.01-5) unstable; urgency=low
+
+  * Changed to use ./debian/tmp/usr/bin/nkf instead nkf in debian/rule, closes: #177576.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Tue, 21 Jan 2003 17:34:51 +0900
+
+nkf (2.01-4) unstable; urgency=low
+
+  * Changed to install newer Japanese manpage, closes: #175536.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Wed, 15 Jan 2003 17:53:59 +0900
+
+nkf (2.01-3) unstable; urgency=low
+
+  * Updated copyright and README.debian, closes: #163192.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Fri,  4 Oct 2002 09:10:13 +0900
+
+nkf (2.01-2) unstable; urgency=low
+
+  * Applied a patch on sourceforge.jp.
+  http://sourceforge.jp/tracker/download.php?group_id=248&atid=1031&file_id=112&aid=588
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Tue,  1 Oct 2002 15:22:49 +0900
+
+nkf (2.01-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Fri, 27 Sep 2002 16:12:20 +0900
+
+nkf (2.00-0.9beta1) unstable; urgency=low
+
+  * New upstream release
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Tue, 17 Sep 2002 11:23:50 +0900
+
+nkf (1.92-8) unstable; urgency=low
+
+  * Rebuild with perl 5.8.0.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Thu, 29 Aug 2002 17:44:06 +0900
+
+nkf (1.92-7) unstable; urgency=low
+
+  * Fixed some wrong description, closes: #146391.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Sat, 11 May 2002 10:56:56 +0900
+
+nkf (1.92-6) unstable; urgency=low
+
+  * Added Build-Depends line, Closes: 111768.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Mon, 10 Sep 2001 09:21:40 +0900
+
+nkf (1.92-5) unstable; urgency=low
+
+  * Added hankaku-kana space conversion patch:
+  http://www.namazu.org/ml/namazu-users-ja/msg00025.html
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Fri,  7 Sep 2001 14:54:07 +0900
+
+nkf (1.92-4) unstable; urgency=low
+
+  * Changed the maintainer.
+  
+  * Rebuild with new perl policy, Closes: Bug#95422.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Tue, 22 May 2001 11:43:26 +0900
+
+nkf (1.92-3) unstable; urgency=low
+
+  * fix build problem (closes: Bug#90200)
+
+ -- Takuo KITAME <kitame@northeye.org>  Mon, 19 Mar 2001 15:36:35 +0900
+
+nkf (1.92-2) unstable; urgency=low
+
+  * Applied patch of Bug#62374. (closes: Bug#62374)
+    Thanks! YAMASHITA Junji <ysjj@unixuser.org>.
+
+ -- Takuo KITAME <kitame@northeye.org>  Wed, 10 May 2000 04:26:10 +0900
+
+nkf (1.92-1) frozen unstable; urgency=low
+
+  * New upstream release
+    - bug fixed release. (closes: Bug#57897)
+
+ -- Takuo KITAME <kitame@northeye.org>  Sun, 27 Feb 2000 02:32:10 +0900
+
+nkf (1.9-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Takuo KITAME <kitame@northeye.org>  Mon, 11 Oct 1999 21:15:01 +0900
+
+nkf (1.7-6) unstable; urgency=low
+
+  * Fixed man pages installation.
+
+ -- Takuo KITAME <kitame@northeye.org>  Sun, 26 Sep 1999 10:22:46 +0900
+
+nkf (1.7-5) unstable; urgency=low
+
+  * Reapplied cap.patch. (Fixed missing apply).
+
+ -- Takuo KITAME <kitame@northeye.org>  Sat, 25 Sep 1999 23:22:13 +0900
+
+nkf (1.7-4) unstable; urgency=low
+
+  * Applied nkf1.7+cap.patch. (closes: Bug#45204).
+  * FHS compliance.
+
+ -- Takuo KITAME <kitame@northeye.org>  Sat, 25 Sep 1999 15:06:29 +0900
+
+nkf (1.7-3) unstable; urgency=low
+
+  * libnkf-perl: Depends: perl5 for New perl package.
+
+ -- Takuro KITAME <kitame@debian.or.jp>  Sun,  4 Jul 1999 14:51:02 +0900
+
+nkf (1.7-2) unstable; urgency=low
+
+  * Add document, "Working log(changelog.DebianJP) at Debian JP Project"
+    (Fixed Bug#36998)
+
+ -- Takuro KITAME <kitame@debian.or.jp>  Tue, 11 May 1999 14:57:07 +0900
+
+nkf (1.7-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Takuro KITAME <kitame@debian.or.jp>  Wed, 28 Apr 1999 01:06:12 +0900
+
+

@@ -1,0 +1,8 @@
+nkf for DEBIAN
+----------------------
+
+nkf is a yet another kanji code converter among networks,
+hosts and terminals. It converts input kanji code to designated
+kanji code such as 7-bit JIS, MS-kanji (shifted-JIS), UTF-8/16 or EUC.
+
+NOKUBI Takatsugu <knok@daionet.gr.jp> Fri Oct  4 09:06:51 JST 2002

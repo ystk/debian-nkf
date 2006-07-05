@@ -1,0 +1,22 @@
+This package was debianized by Takuro KITAME kitame@debian.or.jp on
+Wed, 28 Apr 1999 01:06:12 +0900.
+
+It was downloaded from
+	www01.tcp-ip.or.jp/~furukawa/nkf_utf8/nkf204.tar.gz
+You can also refer to http://sourceforge.jp/projects/nkf/ and
+        http://www.ie.u-ryukyu.ac.jp/~kono/nkf/.
+
+Copyright:
+
+ Copyright (C) 1987, Fujitsu LTD. (Itaru ICHIKAWA)
+  （E-Mail Address: ichikawa@flab.fujitsu.co.jp）
+ Copyright (C) 1996,1998,2002 Kono, COW
+  （E-Mail Address: kono@ie.u-ryukyu.ac.jp）
+
+Everyone is permitted to do anything on this program 
+including copying, modifying, improving,
+as long as you don't try to pretend that you wrote it.
+i.e., the above copyright notice has to appear in all copies.  
+Binary distribution requires original version messages.
+You don't have to ask before copying, redistribution or publishing.
+THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE.

@@ -1,0 +1,80 @@
+#!/usr/bin/make -f
+# Made with the aid of debmake, by Christoph Lameter,
+# based on the sample debian/rules file for GNU hello by Ian Jackson.
+
+export DH_COMPAT=4
+package=nkf
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+
+	make nkf CC=cc
+	cd NKF.mod && /usr/bin/perl Makefile.PL INSTALLDIRS=vendor && make CC=cc CFLAGS="-O2 -g -Wall"
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	-rm -f build-stamp
+
+	-make clean
+	-cd NKF.mod ; $(MAKE) distclean
+
+	dh_clean
+
+# Build architecture-independent files here.
+binary-indep: build
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# Install nkf package
+	install -s -m 755 nkf debian/nkf/usr/bin
+	./debian/nkf/usr/bin/nkf -e nkf.1j > debian/nkf.1j.tmp
+	install -m 444 debian/nkf.1j.tmp debian/nkf/usr/share/man/ja/man1/nkf.1
+	rm -f debian/nkf.1j.tmp
+	install -m 444 nkf.1 debian/nkf/usr/share/man/man1/nkf.1
+
+	cd NKF.mod; make install PREFIX=`pwd`/../debian/nkf/usr
+	find `pwd`/debian/nkf -type f -name .packlist | xargs -r rm
+
+	dh_installdocs
+
+	## Working log at Debian JP Project.
+	cp `pwd`/debian/changelog.DebianJP `pwd`/debian/nkf/usr/share/doc/nkf/
+	cp `pwd`/debian/nkf1.7+cap1.patch `pwd`/debian/nkf/usr/share/doc/nkf/
+	gzip -9 `pwd`/debian/nkf/usr/share/doc/nkf/changelog.DebianJP
+	gzip -9 `pwd`/debian/nkf/usr/share/doc/nkf/nkf1.7+cap1.patch
+
+#	dh_installexamples
+#	dh_installmenu
+#	dh_installinit
+#	dh_installcron
+#	dh_installmanpages -pnkf
+#	dh_undocumented
+	dh_installchangelogs NKF.mod/Changes
+	dh_strip
+	dh_movefiles -plibnkf-perl --sourcedir debian/nkf
+	-rm -rf `pwd`/debian/nkf/usr/lib `pwd`/debian/nkf/usr/share/perl5
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_perl
+	dh_shlibdeps
+	dh_gencontrol
+#	dh_makeshlibs
+	dh_md5sums
+	dh_builddeb
+
+source diff:                                                                  
+	@echo >&2 'source and diff are obsolete - use dpkg-source -b'; false
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary

@@ -1,0 +1,72 @@
+nkf (1:1.7-3.1) experimental; urgency=low
+
+  * Build NKF.pm in libnkf-perl
+
+ -- Fumitoshi UKAI <ukai@debian.or.jp>  Sat, 10 Apr 1999 01:20:29 +0900
+
+nkf (1:1.7-3) frozen unstable; urgency=low
+
+  * Change japanese manpage's character code to EUC-JAPAN. (#JP/792)
+  * Lintian free(v1.0).
+
+ -- Yoshiaki Yanagihara <yochi@debian.or.jp>  Mon,  1 Mar 1999 12:07:22 +0900
+
+nkf (1:1.7-2) frozen unstable; urgency=low
+
+  * Added epoch number to upgrade from 1.62p5 to 1.7.
+  * (debian/copyright) Added address of ftp site to get source file.
+  * Applied patch 1. (nkf-1.7p1)
+
+ -- Yoshiaki Yanagihara <yochi@debian.or.jp>  Sat, 21 Nov 1998 15:41:41 +0900
+
+nkf (1.7-1) unstable; urgency=low
+
+  * Changed distribution to main because original lisence is changed.
+  * Standards-Version 2.1.4.2
+
+ -- Yoshiaki Yanagihara <yochi@debian.or.jp>  Tue, 10 Nov 1998 15:53:21 +0900
+
+nkf (1.62p5-5) frozen-jp unstable-jp; urgency=low
+
+  * Changed distribution from main to non-free. (Bug#JP/314)
+  * Added changelog.Debian file. (Bug#JP/399)
+  * Passwd lintian-0.4.8 check.
+  * Built with debhelper.
+  * Release for Debian JP Project (not for Debian Project).
+
+ -- Yoshiaki Yanagihara <yochi@debian.or.jp>  Tue, 30 Jun 1998 10:27:53 +0900
+
+nkf (1.62p5-4) unstable; urgency=low
+
+  * Fix Bug: no /usr/doc/nkf.
+  * Check with lintian.
+
+ -- Yoshiaki Yanagihara <yochi@debian.or.jp>  Wed, 18 Mar 1998 19:15:03 +0900
+
+nkf (1.62p5-3) unstable; urgency=low
+
+  * First Release for Debian Project.
+  * Changed Maintainer E-mail address.	
+  * Re-compiled with libc6. 
+  * Converted to make with debhelper.
+
+ -- Yoshiaki Yanagihara <yochi@debian.or.jp>  Wed, 18 Mar 1998 14:51:12 +0900
+
+nkf (1.62p5-2) unstable; urgency=low
+
+  * New upstream version.
+  * Used debmake for debianized package.
+  * Standards-Version 2.1.1.0
+
+ -- Yoshiaki Yanagihara <yochi@linux.or.jp>  Fri, 25 Oct 1996 11:47:01 +0900
+
+nkf (1.62p5-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Yoshiaki Yanagihara <yochi@linux.or.jp>  Fri, 25 Oct 1996 10:26:08 +0900
+
+Local variables:
+mode: debian-changelog
+add-log-mailing-address: "yochi@debian.or.jp"
+End:
