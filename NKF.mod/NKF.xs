@@ -1,17 +1,17 @@
 /***********************************************************************
 ** Copyright (C) 1996,1998
 ** Copyright (C) 2002
-** $BO"Mm@h!'(B $BN05eBg3X>pJs9)3X2J(B $B2OLn(B $B??<#(B  mime/X0208 support
-** $B!J(BE-Mail Address: kono@ie.u-ryukyu.ac.jp$B!K(B
-** $BO"Mm@h!'(B COW for DOS & Win16 & Win32 & OS/2
-** $B!J(BE-Mail Address: GHG00637@niftyserve.or.p$B!K(B
+** Ï¢ÍíÀè¡§ Î°µåÂç³Ø¾ðÊó¹©³Ø²Ê ²ÏÌî ¿¿¼£  mime/X0208 support
+** ¡ÊE-Mail Address: kono@ie.u-ryukyu.ac.jp¡Ë
+** Ï¢ÍíÀè¡§ COW for DOS & Win16 & Win32 & OS/2
+** ¡ÊE-Mail Address: GHG00637@niftyserve.or.p¡Ë
 **    
-**    $B$3$N%=!<%9$N$$$+$J$kJ#<L!$2~JQ!$=$@5$b5vBz$7$^$9!#$?$@$7!"(B
-**    $B$=$N:]$K$O!"C/$,9W8%$7$?$r<($9$3$NItJ,$r;D$9$3$H!#(B
-**    $B:FG[I[$d;(;o$NIUO?$J$I$NLd$$9g$o$;$bI,MW$"$j$^$;$s!#(B
-**    $B1DMxMxMQ$b>e5-$KH?$7$J$$HO0O$G5v2D$7$^$9!#(B
-**    $B%P%$%J%j$NG[I[$N:]$K$O(Bversion message$B$rJ]B8$9$k$3$H$r>r7o$H$7$^$9!#(B
-**    $B$3$N%W%m%0%i%`$K$D$$$F$OFC$K2?$NJ]>Z$b$7$J$$!"0-$7$+$i$:!#(B
+**    ¤³¤Î¥½¡¼¥¹¤Î¤¤¤«¤Ê¤ëÊ£¼Ì¡¤²þÊÑ¡¤½¤Àµ¤âµöÂú¤·¤Þ¤¹¡£¤¿¤À¤·¡¢
+**    ¤½¤ÎºÝ¤Ë¤Ï¡¢Ã¯¤¬¹×¸¥¤·¤¿¤ò¼¨¤¹¤³¤ÎÉôÊ¬¤ò»Ä¤¹¤³¤È¡£
+**    ºÆÇÛÉÛ¤ä»¨»ï¤ÎÉÕÏ¿¤Ê¤É¤ÎÌä¤¤¹ç¤ï¤»¤âÉ¬Í×¤¢¤ê¤Þ¤»¤ó¡£
+**    ±ÄÍøÍøÍÑ¤â¾åµ­¤ËÈ¿¤·¤Ê¤¤ÈÏ°Ï¤Çµö²Ä¤·¤Þ¤¹¡£
+**    ¥Ð¥¤¥Ê¥ê¤ÎÇÛÉÛ¤ÎºÝ¤Ë¤Ïversion message¤òÊÝÂ¸¤¹¤ë¤³¤È¤ò¾ò·ï¤È¤·¤Þ¤¹¡£
+**    ¤³¤Î¥×¥í¥°¥é¥à¤Ë¤Ä¤¤¤Æ¤ÏÆÃ¤Ë²¿¤ÎÊÝ¾Ú¤â¤·¤Ê¤¤¡¢°­¤·¤«¤é¤º¡£
 **    
 **    Everyone is permitted to do anything on this program
 **    including copying, modifying, improving, 
@@ -95,7 +95,10 @@ nkf_putchar_grow(unsigned int c)
 
 #define PERL_XS 1
 #include "../utf8tbl.c"
+#undef SP
 #include "../nkf.c"
+#undef SP
+#define SP sp /* perl's CORE/pp.h */
 
 /* package defenition  */
 
@@ -133,9 +136,6 @@ nkf(...)
     /* Get input data pointer from the last variable. */
     data = SvPV(ST(argc),i_len);
     input_ctr = 0;
-
-    if(x0201_f == WISH_TRUE)
-         x0201_f = ((!iso2022jp_f)? TRUE : NO_X0201);
 
     /* allocate the result buffer */
 
@@ -177,9 +177,6 @@ nkf_continue(...)
     /* Get input data pointer from the last variable. */
     data = SvPV(ST(0),i_len);
     input_ctr = 0;
-
-    if(x0201_f == WISH_TRUE)
-         x0201_f = ((!iso2022jp_f)? TRUE : NO_X0201);
 
     /* allocate the result buffer */
 

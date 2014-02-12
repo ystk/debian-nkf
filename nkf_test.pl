@@ -2,8 +2,6 @@
 #
 # nkf test program for nkf-2
 #
-# $Id: nkf_test.pl,v 1.17 2006/05/01 19:51:31 naruse Exp $
-#
 #    Shinji KONO <kono@ie.u-ryukyu.ac.jp>
 # Sun Aug 18 12:25:40 JST 1996
 # Sun Nov  8 00:16:06 JST 1998
@@ -186,7 +184,7 @@ print "UTF8 to U16L0..";&test("$nkf --ic=utf-8 --oc=utf-16le",		$example{'utf8N'
 print "UTF8 to U16B...";&test("$nkf --ic=utf-8 --oc=utf-16be-bom",	$example{'utf8N'},$example{'u16B'});
 print "UTF8 to U16B0..";&test("$nkf --ic=utf-8 --oc=utf-16be",		$example{'utf8N'},$example{'u16B0'});
 
-
+print "UTF8 to UTF8...";&test("$nkf -w","\xf0\xa0\x80\x8b","\xf0\xa0\x80\x8b");
 
 # From JIS
 
@@ -216,8 +214,37 @@ print "UTF8 to SJIS...";&test("$nkf -s",$example{'utf1'},$example{'sjis1'});
 print "UTF8 to EUC ...";&test("$nkf -e",$example{'utf1'},$example{'euc1'});
 print "UTF8 to UTF8...";&test("$nkf -w",$example{'utf1'},$example{'utf1'});
 
-print "\nOther Features\n\n";
+# UTF
+sub h {pack("H*",shift)}
+print "SJIS to -w...          ";&test("$nkf -w",h("82A0"),h("E38182"));
+print "SJIS to -w8...         ";&test("$nkf -w8",h("82A0"),h("EFBBBFE38182"));
+print "SJIS to -w80...        ";&test("$nkf -w80",h("82A0"),h("E38182"));
+print "SJIS to UTF-8...       ";&test("$nkf --oc=UTF-8",h("82A0"),h("E38182"));
+print "SJIS to UTF-8N...      ";&test("$nkf --oc=UTF-8N",h("82A0"),h("E38182"));
+print "SJIS to UTF-8-BOM...   ";&test("$nkf --oc=UTF-8-BOM",h("82A0"),h("EFBBBFE38182"));
+print "SJIS to -w16...        ";&test("$nkf -w16",h("82A0"),h("FEFF3042"));
+print "SJIS to UTF-16...      ";&test("$nkf --oc=UTF-16",h("82A0"),h("FEFF3042"));
+print "SJIS to -w16B...       ";&test("$nkf -w16B",h("82A0"),h("FEFF3042"));
+print "SJIS to -w16B0...      ";&test("$nkf -w16B0",h("82A0"),h("3042"));
+print "SJIS to UTF-16BE...    ";&test("$nkf --oc=UTF-16BE",h("82A0"),h("3042"));
+print "SJIS to UTF-16BE-BOM...";&test("$nkf --oc=UTF-16BE-BOM",h("82A0"),h("FEFF3042"));
+print "SJIS to -w16L...       ";&test("$nkf -w16L",h("82A0"),h("FFFE4230"));
+print "SJIS to -w16L0...      ";&test("$nkf -w16L0",h("82A0"),h("4230"));
+print "SJIS to UTF-16LE...    ";&test("$nkf --oc=UTF-16LE",h("82A0"),h("4230"));
+print "SJIS to UTF-16LE-BOM...";&test("$nkf --oc=UTF-16LE-BOM",h("82A0"),h("FFFE4230"));
+print "SJIS to -w32...        ";&test("$nkf -w32",h("82A0"),h("0000FEFF00003042"));
+print "SJIS to UTF-32...      ";&test("$nkf --oc=UTF-32",h("82A0"),h("0000FEFF00003042"));
+print "SJIS to -w32B...       ";&test("$nkf -w32B",h("82A0"),h("0000FEFF00003042"));
+print "SJIS to -w32B0...      ";&test("$nkf -w32B0",h("82A0"),h("00003042"));
+print "SJIS to UTF-32BE...    ";&test("$nkf --oc=UTF-32BE",h("82A0"),h("00003042"));
+print "SJIS to UTF-32BE-BOM...";&test("$nkf --oc=UTF-32BE-BOM",h("82A0"),h("0000FEFF00003042"));
+print "SJIS to -w32L...       ";&test("$nkf -w32L",h("82A0"),h("FFFE000042300000"));
+print "SJIS to -w32L0...      ";&test("$nkf -w32L0",h("82A0"),h("42300000"));
+print "SJIS to UTF-32LE...    ";&test("$nkf --oc=UTF-32LE",h("82A0"),h("42300000"));
+print "SJIS to UTF-32LE-BOM...";&test("$nkf --oc=UTF-32LE-BOM",h("82A0"),h("FFFE000042300000"));
 
+
+print "\nOther Features\n\n";
 # Ambigous Case
 
 $example{'amb'} = unpack('u',<<'eofeof');
@@ -260,6 +287,13 @@ printf "%-40s", "Ambiguous Case.";
 printf "%-40s", "SJIS  Input assumption";
     &test("$nkf -jSx",$example{'amb'},$example{'amb.sjis'});
 
+# UTF8_STR_OF_JIS_SECOND_LEVEL_KANJI
+$example{'utf8_str_of_jis_second_level_kanji'} = "\xe9\xa4\x83\xe5\xad\x90";
+
+printf "%-40s", "UTF8_STR_OF_JIS_SECOND_LEVEL_KANJI";
+    &test("$nkf -w",$example{'utf8_str_of_jis_second_level_kanji'},
+	    $example{'utf8_str_of_jis_second_level_kanji'});
+
 # Broken JIS
 
 printf "%-40s", "Broken JIS";
@@ -287,7 +321,7 @@ printf "%-40s", "test_data/cp51932";
 
 # test_data/cp932inv
 printf "%-40s", "test_data/cp932inv";
-    &test("$nkf -sE --cp932inv",$example{'test_data/cp932.ans'},$example{'test_data/cp932'});
+    &test("$nkf -sE --cp932",$example{'test_data/cp932.ans'},$example{'test_data/cp932'});
 
 # test_data/no-cp932inv
 
@@ -297,22 +331,6 @@ eofeof
 
 printf "%-40s", "test_data/no-cp932inv";
     &test("$nkf -sE --no-cp932",$example{'test_data/cp932.ans'},$example{'test_data/no-cp932inv.ans'});
-# ISO-2022-JP-MS
-$example{'iso2022jpms_sjis'} = "\xA1\xDF\xF0\xA0\xF4\xFC\xF5\x40\xF9\xFC";
-$example{'iso2022jpms_euc'} = "\x8e\xa1\x8e\xdf\xf6\xa2\xfe\xfe\x8f\xf5\xa1\x8f\xfe\xfe";
-$example{'iso2022jpms_jis'} = "\x1b\x28\x49\x21\x5f\x1b\x24\x28\x3f\x22\x22\x2a\x7e\x2b\x21\x34\x7e\x1b\x28\x42";
-
-# printf "%-40s", "ISO-2022-JP-MS to CP932";
-#     &test("$nkf --ic=ISO-2022-JP-MS --oc=CP932",$example{'iso2022jpms_jis'},$example{'iso2022jpms_sjis'});
-# 
-# printf "%-40s", "CP932 to ISO-2022-JP-MS";
-#     &test("$nkf --ic=CP932 --oc=ISO-2022-JP-MS",$example{'iso2022jpms_sjis'},$example{'iso2022jpms_jis'});
-# 
-# printf "%-40s", "ISO-2022-JP-MS to eucJP-ms";
-#     &test("$nkf --ic=ISO-2022-JP-MS --oc=eucJP-ms",$example{'iso2022jpms_jis'},$example{'iso2022jpms_euc'});
-# 
-# printf "%-40s", "eucJP-ms to ISO-2022-JP-MS";
-#     &test("$nkf --ic=eucJP-ms --oc=ISO-2022-JP-MS",$example{'iso2022jpms_euc'},$example{'iso2022jpms_jis'});
 # JIS X 0212
 $example{'jisx0212_euc'} = "\x8F\xA2\xAF\x8F\xED\xE3";
 $example{'jisx0212_jis'} = "\x1b\x24\x28\x44\x22\x2f\x6d\x63\x1b\x28\x42";
@@ -332,8 +350,11 @@ $example{'jisx0213_euc'} = unpack('u',<<'eofeof');
 2HJ^O_<_5S_WTJ/[YCZ&AC_[V
 eofeof
 
-$example{'jisx0213_jis'} = unpack('u',<<'eofeof');
+$example{'jisx0213_jis2000'} = unpack('u',<<'eofeof');
 ;&R0H3R(O+WU/54]]="A^>1LD*%`A(7YV&RA"
+eofeof
+$example{'jisx0213_jis2004'} = unpack('u',<<'eofeof');
+;&R0H42(O+WU/54]]="A^>1LD*%`A(7YV&RA"
 eofeof
 
 printf "%-40s", "Shift_JISX0213 to EUC-JISX0213";
@@ -343,10 +364,13 @@ printf "%-40s", "EUC-JISX0213 to Shift_JISX0213";
     &test("$nkf --ic=EUC-JISX0213 --oc=Shift_JISX0213",$example{'jisx0213_euc'},$example{'jisx0213_sjis'});
 
 printf "%-40s", "ISO-2022-JP-3 to EUC-JISX0213";
-    &test("$nkf --ic=ISO-2022-JP-3 --oc=EUC-JISX0213",$example{'jisx0213_jis'},$example{'jisx0213_euc'});
+    &test("$nkf --ic=ISO-2022-JP-3 --oc=EUC-JISX0213",$example{'jisx0213_jis2000'},$example{'jisx0213_euc'});
 
-printf "%-40s", "EUC-JISX0213 to ISO-2022-JP-3";
-    &test("$nkf --ic=EUC-JISX0213 --oc=ISO-2022-JP-3",$example{'jisx0213_euc'},$example{'jisx0213_jis'});
+printf "%-40s", "ISO-2022-JP-2004 to EUC-JISX0213";
+    &test("$nkf --ic=ISO-2022-JP-2004 --oc=EUC-JISX0213",$example{'jisx0213_jis2004'},$example{'jisx0213_euc'});
+
+printf "%-40s", "EUC-JISX0213 to ISO-2022-JP-2004";
+    &test("$nkf --ic=EUC-JISX0213 --oc=ISO-2022-JP-2004",$example{'jisx0213_euc'},$example{'jisx0213_jis2004'});
 # test_data/no_best_fit_chars
 
 $example{'test_data/no_best_fit_chars'} = unpack('u',<<'eofeof');
@@ -395,17 +419,17 @@ $example{'ms_ucs_map_1_utf16'} = "\x30\x1C\x20\x16\x22\x12\x00\xA2\x00\xA3\x00\x
 $example{'ms_ucs_map_1_utf16_ms'} = "\xFF\x5E\x22\x25\xFF\x0D\xFF\xE0\xFF\xE1\xFF\xE2";
 
 printf "%-40s", "Normal UCS Mapping :";
-    &test("$nkf -w16B0 -S",$example{'ms_ucs_map_1_sjis'},$example{'ms_ucs_map_1_utf16'});
+    &test("$nkf -w16B0 --ic=Shift_JIS",$example{'ms_ucs_map_1_sjis'},$example{'ms_ucs_map_1_utf16'});
 
 printf "%-40s", "Microsoft UCS Mapping :";
     &test("$nkf -w16B0 -S --ms-ucs-map",$example{'ms_ucs_map_1_sjis'},$example{'ms_ucs_map_1_utf16_ms'});
 printf "%-40s", "CP932 to UTF-16BE :";
     &test("$nkf --ic=cp932 --oc=utf-16be",$example{'ms_ucs_map_1_sjis'},$example{'ms_ucs_map_1_utf16_ms'});
 
-# X0201 $B2>L>(B
+# X0201 仮名
 # X0201->X0208 conversion
 # X0208 aphabet -> ASCII
-# X0201 $BAj8_JQ49(B
+# X0201 相互変換
 
 print "\nX0201 test\n\n";
 
@@ -476,6 +500,24 @@ printf "%-40s", "X0201 conversion: EUC";
     &test("$nkf -jZ",$example{'x0201.euc'},$example{'x0201.x0208'});
 printf "%-40s", "X0201 conversion: UTF8";
     &test("$nkf -jZ",$example{'x0201.utf'},$example{'x0201.x0208'});
+printf "%-40s", "-wZ"; &test("$nkf -wZ",
+	"\xE3\x80\x80\xEF\xBD\x81\xEF\xBC\xA1&\xE3\x82\xA2",
+	"\xE3\x80\x80aA&\xE3\x82\xA2");
+printf "%-40s", "-wZ0"; &test("$nkf -wZ0",
+	"\xE3\x80\x80\xEF\xBD\x81\xEF\xBC\xA1&\xE3\x82\xA2",
+	"\xE3\x80\x80aA&\xE3\x82\xA2");
+printf "%-40s", "-wZ1"; &test("$nkf -wZ1",
+	"\xE3\x80\x80\xEF\xBD\x81\xEF\xBC\xA1&\xE3\x82\xA2",
+	" aA&\xE3\x82\xA2");
+printf "%-40s", "-wZ2"; &test("$nkf -wZ2",
+	"\xE3\x80\x80\xEF\xBD\x81\xEF\xBC\xA1&\xE3\x82\xA2",
+	"  aA&\xE3\x82\xA2");
+printf "%-40s", "-wZ3"; &test("$nkf -wZ3",
+	"\xE3\x80\x80\xEF\xBD\x81\xEF\xBC\xA1&\xE3\x82\xA2",
+	"\xE3\x80\x80aA&amp;\xE3\x82\xA2");
+printf "%-40s", "-wZ4"; &test("$nkf -wZ4",
+	"\xE3\x80\x80\xEF\xBD\x81\xEF\xBC\xA1&\xE3\x82\xA2",
+	"\xE3\x80\x80aA&\xEF\xBD\xB1");
 # -x means X0201 output
 printf "%-40s", "X0201 output: SJIS";
     &test("$nkf -xs",$example{'x0201.euc'},$example{'x0201.sjis'});
@@ -599,7 +641,7 @@ eofeof
 # Without -l, ISO-8859-1 was handled as X0201.
 
 printf "%-40s", "MIME ISO-8859-1 (Q)";
-    &test("$nkf -ml",$example{'mime.is8859'},$example{'mime.is8859.ans'});
+    &test("$nkf -jml",$example{'mime.is8859'},$example{'mime.is8859.ans'});
 
 # test for -f is not so simple.
 
@@ -720,112 +762,22 @@ M2D-):TI"<V]19ST]/ST*(#T_25-/+3(P,C(M2E`_0C]'>5)#2D-9:TM#47%'
 @>6A#/ST@86%A82!A86%A(&%A86$@86%A80HM+2TM"@H`
 eofeof
 
+$example{'test_data/mime_out.ans.alt3'} = unpack('u',<<'eofeof');
+M"BTM+2T*4W5B:F5C=#H@86%A82!A86%A(&%A86$@86%A82!A86%A(&%A86$@
+M86%A82!A86%A(&%A86$@86%A82!A86%A(&%A86$@86%A80H@86%A80HM+2TM
+M"E-U8FIE8W0Z(#T_25-/+3(P,C(M2E`_0C]'>5)#2D-):TI#46U*0V=K2VE1
+M<DI#,&M,>5%X2D1-:TY343-*1&MK3WE1.4=Y:$,_/0H@/3])4T\M,C`R,BU*
+M4#]"/T=Y4D-*1#AK45-214I%66M30U)+2D5S:U1#4DY*131K5'E24TI&56M7
+M0U)B2D8T:UAX<V]19ST]/ST*(#T_25-/+3(P,C(M2E`_0C]'>5)#2D=!:UE3
+M4FE*1U%K2D-2;4I#9VMA0G-O46<]/3\]"BTM+2T*4W5B:F5C=#H@86%A82!A
+M86%A(&%A86$@86%A82!A86%A(&%A86$@86%A82`]/TE33RTR,#(R+4I0/T(_
+M1WE20TI#26M*0G-O46<]/3\]"B`]/TE33RTR,#(R+4I0/T(_1WE20TI#66M+
+D0U%Q1WEH0S\](&%A86$@86%A82!A86%A(&%A86$*+2TM+0H*1
+eofeof
+
 printf "%-40s", "test_data/mime_out";
-    &test("$nkf -jM",$example{'test_data/mime_out'},$example{'test_data/mime_out.ans'},$example{'test_data/mime_out.ans.alt'},$example{'test_data/mime_out.ans.alt2'});
-# test_data/mime_out2
-
-$example{'test_data/mime_out2'} = unpack('u',<<'eofeof');
-M5&AI<R!M96UO(&1E<V-R:6)E<R!S:6UI;&%R('1E8VAN:7%U97,@=&\@86QL\
-M;W<@=&AE(&5N8V]D:6YG(&]F(&YO;BU!4T-)22!T97AT(&EN('9A<FEO=7,@
-M<&]R=&EO;G,@;V8@82!21D,@.#(R(%LR72!M97-S86=E(&AE861E<BP@:6X@
-M82!M86YN97(@=VAI8V@@:7,@=6YL:6ME;'D@=&\@8V]N9G5S92!E>&ES=&EN
-M9R!M97-S86=E(&AA;F1L:6YG('-O9G1W87)E+@H*4W5B:F5C=#H@=&5S=#$@
-M=&5S=#(@@L2"MX+&@J<@=&5S=#,@@L2"MX+&@O$@=&5S=#0*"E-U8FIE8W0Z
-M('1E<W0Q("!T97-T,B""Q"""MR""QB""IR!T97-T,R`@@L2"MX+&@O$@('1E
-M<W0T"@I!4T-)22"3^I9[C.H@05-#24D@05-#24D@D_J6>XSJ()/ZEGN,ZB!!
-M4T-)22!!4T-)29/ZEGN,ZB!!4T-)20H*@J`@@J(@@J0@@J8@@J@@@JD@@JL@
-M@JT@@J\@@K$@@K,@@K4@@K<@@KD@@KL@@KT@@K\@@L(@@L0@@L8@@L@@@LD@
-8@LH@@LL@@LP*"@H*"@H*"@H*"@H*"@H*
-eofeof
-
-$example{'test_data/mime_out2.ans'} = unpack('u',<<'eofeof');
-M5&AI<R!M96UO(&1E<V-R:6)E<R!S:6UI;&%R('1E8VAN:7%U97,@=&\@86QL
-M;W<@=&AE(&5N8V]D:6YG(&]F(&YO;BU!4T-)20H@=&5X="!I;B!V87)I;W5S
-M('!O<G1I;VYS(&]F(&$@4D9#(#@R,B!;,ET@;65S<V%G92!H96%D97(L(&EN
-M(&$@;6%N;F5R"B!W:&EC:"!I<R!U;FQI:V5L>2!T;R!C;VYF=7-E(&5X:7-T
-M:6YG(&UE<W-A9V4@:&%N9&QI;F<@<V]F='=A<F4N"@I3=6)J96-T.B!T97-T
-M,2!T97-T,B`]/TE33RTR,#(R+4I0/T(_1WE20TI%66M/4U))2D-K8DM%23T_
-M/2!T97-T,PH@/3])4T\M,C`R,BU*4#]"/T=Y4D-*15EK3U-224I(36)+14D]
-M/ST@=&5S=#0*"E-U8FIE8W0Z('1E<W0Q("!T97-T,B`]/TE33RTR,#(R+4I0
-M/T(_1WE20TI%66)+14EG1WE20TI$:V)+14D]/ST*(#T_25-/+3(P,C(M2E`_
-M0C]'>5)#2D5G8DM%26='>5)#2D-K8DM%23T_/2!T97-T,R`*(#T_25-/+3(P
-M,C(M2E`_0C]'>5)#2D59:T]34DE*2$UB2T5)/3\]("!T97-T-`H*05-#24D@
-M/3])4T\M,C`R,BU*4#]"/T=Y4D-2;GA,6$1H<T=Y:$,_/2!!4T-)22!!4T-)
-M20H@/3])4T\M,C`R,BU*4#]"/T=Y4D-2;GA,6$1H<T=Y:$-)0G-K46M:.%,Q
-M=S1B0G-O46<]/3\]($%30TE)"B`]/TE33RTR,#(R+4I0/T(_459.1%-5:V)*
-M14I'9D5T8T]'=V)+14D]/ST@05-#24D*"CT_25-/+3(P,C(M2E`_0C]'>5)#
-M2D-)8DM%26='>5)#2D-18DM%26='>5)#2D-98DM%26='>5)#2D-G8DM%26<_
-M/0H@/3])4T\M,C`R,BU*4#]"/T=Y4D-*0V]B2T5)9T=Y4D-*0W-B2T5)9T=Y
-M4D-*0S!B2T5)9T=Y4D-*0SAB2T5)9S\]"B`]/TE33RTR,#(R+4I0/T(_1WE2
-M0TI$16)+14EG1WE20TI$36)+14EG1WE20TI$56)+14EG1WE20TI$8V)+14EG
-M/ST*(#T_25-/+3(P,C(M2E`_0C]'>5)#2D1K8DM%26='>5)#2D1S8DM%26='
-M>5)#2D0P8DM%26='>5)#2D0X8DM%26<_/0H@/3])4T\M,C`R,BU*4#]"/T=Y
-M4D-*145B2T5)9T=Y4D-*15%B2T5)9T=Y4D-*15EB2T5)9T=Y4D-*16=B2T5)
-M9S\]"B`]/TE33RTR,#(R+4I0/T(_1WE20TI%;V)+14EG1WE20TI%<V)+14EG
-M1WE20TI%=V)+14EG1WE20TI%,&)+14EG/ST*(#T_25-/+3(P,C(M2E`_0C]'
-=>5)#2D4T8DM%23T_/0H*"@H*"@H*"@H*"@H*"@H`
-eofeof
-
-$example{'test_data/mime_out2.ans.alt'} = unpack('u',<<'eofeof');
-M5&AI<R!M96UO(&1E<V-R:6)E<R!S:6UI;&%R('1E8VAN:7%U97,@=&\@86QL
-M;W<@=&AE(&5N8V]D:6YG"B!O9B!N;VXM05-#24D@=&5X="!I;B!V87)I;W5S
-M('!O<G1I;VYS(&]F(&$@4D9#(#@R,B!;,ET*(&UE<W-A9V4@:&5A9&5R+"!I
-M;B!A(&UA;FYE<B!W:&EC:"!I<R!U;FQI:V5L>2!T;R!C;VYF=7-E(&5X:7-T
-M:6YG"B!M97-S86=E(&AA;F1L:6YG('-O9G1W87)E+@H*4W5B:F5C=#H@=&5S
-M=#$@=&5S=#(@/3])4T\M,C`R,BU*4#]"/T=Y4D-*15EK3U-224I#:V)+14D]
-M/ST@=&5S=#,*(#T_25-/+3(P,C(M2E`_0C]'>5)#2D59:T]34DE*2$UB2T5)
-M/3\]('1E<W0T"@I3=6)J96-T.B!T97-T,2`@=&5S=#(@/3])4T\M,C`R,BU*
-M4#]"/T=Y4D-*15EB2T5)9T=Y4D-*1&MB2T5)9T=Y4D-*16=B2T5)/3\]"B`]
-M/TE33RTR,#(R+4I0/T(_1WE20T=Y:$-)0G-K46E1<$=Y:$,_/2!T97-T,R`*
-M(#T_25-/+3(P,C(M2E`_0C]'>5)#2D59:T]34DE*2$UB2T5)/3\]("!T97-T
-M-`H*05-#24D@/3])4T\M,C`R,BU*4#]"/T=Y4D-2;GA,6$1H<T=Y:$,_/2!!
-M4T-)22!!4T-)20H@/3])4T\M,C`R,BU*4#]"/T=Y4D-2;GA,6$1H<T=Y:$-)
-M0G-K46M:.%,Q=S1B0G-O46<]/3\]($%30TE)"B`]/TE33RTR,#(R+4I0/T(_
-M459.1%-5:V)*14I'9D5T8T]'=V)+14D]/ST@05-#24D*"CT_25-/+3(P,C(M
-M2E`_0C]'>5)#2D-)8DM%26='>5)#2D-18DM%26='>5)#2D-98DM%26='>5)#
-M2D-G8DM%26='>5)#2D-O8DM%23T_/0H@/3])4T\M,C`R,BU*4#]"/T=Y4D-'
-M>6A#24)S:U%I47)'>6A#24)S:U%I471'>6A#24)S:U%I479'>6A#24)S:U%I
-M47A'>6A#/ST*(#T_25-/+3(P,C(M2E`_0C]'>5)#1WEH0TE"<VM1:5%Z1WEH
-M0TE"<VM1:5$Q1WEH0TE"<VM1:5$S1WEH0TE"<VM1:5$U1WEH0S\]"B`]/TE3
-M3RTR,#(R+4I0/T(_1WE20T=Y:$-)0G-K46E1-T=Y:$-)0G-K46E1.4=Y:$-)
-M0G-K46E1+T=Y:$-)0G-K46E20D=Y:$,_/0H@/3])4T\M,C`R,BU*4#]"/T=Y
-M4D-'>6A#24)S:U%I4D5'>6A#24)S:U%I4D='>6A#24)S:U%I4DE'>6A#24)S
-M:U%I4DM'>6A#/ST*(#T_25-/+3(P,C(M2E`_0C]'>5)#1WEH0TE"<VM1:5),
-M1WEH0TE"<VM1:5)-1WEH0TE"<VM1:5).1WEH0TE"<VM1:5)/1WEH0S\]"B`]
-I/TE33RTR,#(R+4I0/T(_1WE20T=Y:$,_/0H*"@H*"@H*"@H*"@H*"@H`
-eofeof
-
-$example{'test_data/mime_out2.ans.alt2'} = unpack('u',<<'eofeof');
-M5&AI<R!M96UO(&1E<V-R:6)E<R!S:6UI;&%R('1E8VAN:7%U97,@=&\@86QL
-M;W<@=&AE(&5N8V]D:6YG(&]F(&YO;BU!4T-)20H@=&5X="!I;B!V87)I;W5S
-M('!O<G1I;VYS(&]F(&$@4D9#(#@R,B!;,ET@;65S<V%G92!H96%D97(L(&EN
-M(&$@;6%N;F5R('=H:6-H"B!I<R!U;FQI:V5L>2!T;R!C;VYF=7-E(&5X:7-T
-M:6YG(&UE<W-A9V4@:&%N9&QI;F<@<V]F='=A<F4N"@I3=6)J96-T.B!T97-T
-M,2!T97-T,B`]/TE33RTR,#(R+4I0/T(_1WE20TI%66M/4U))2D-K8DM%23T_
-M/2!T97-T,R`*(#T_25-/+3(P,C(M2E`_0C]'>5)#2D59:T]34DE*2$UB2T5)
-M/3\]('1E<W0T"@I3=6)J96-T.B!T97-T,2`@=&5S=#(@/3])4T\M,C`R,BU*
-M4#]"/T=Y4D-*15EB2T5)9T=Y4D-*1&MB2T5)9T=Y4D-*16=B2T5)9S\]"B`]
-M/TE33RTR,#(R+4I0/T(_1WE20TI#:V)+14D]/ST@=&5S=#,@(#T_25-/+3(P
-M,C(M2E`_0C]'>5)#2D59:T]34DE'>6A#/ST*(#T_25-/+3(P,C(M2E`_0C]'
-M>5)#2DA-8DM%23T_/2`@=&5S=#0*"D%30TE)(#T_25-/+3(P,C(M2E`_0C]'
-M>5)#4FYX3%A$:'-'>6A#/ST@05-#24D@05-#24D@"B`]/TE33RTR,#(R+4I0
-M/T(_1WE20U)N>$Q81&AS1WEH0TE"<VM1:UHX4S%W-&)"<V]19ST]/ST@05-#
-M24D@"B`]/TE33RTR,#(R+4I0/T(_459.1%-5:V)*14I'9D5T8T]'=V)+14D]
-M/ST@05-#24D*"CT_25-/+3(P,C(M2E`_0C]'>5)#2D-)8DM%26='>5)#2D-1
-M8DM%26='>5)#2D-98DM%26='>5)#2D-G8DM%26='>5)#2D-O8DM%26<_/0H@
-M/3])4T\M,C`R,BU*4#]"/T=Y4D-*0W-B2T5)9T=Y4D-*0S!B2T5)9T=Y4D-*
-M0SAB2T5)9T=Y4D-*1$5B2T5)9T=Y4D-*1$UB2T5)9S\]"B`]/TE33RTR,#(R
-M+4I0/T(_1WE20TI$56)+14EG1WE20TI$8V)+14EG1WE20TI$:V)+14EG1WE2
-M0TI$<V)+14EG1WE20TI$,&)+14EG/ST*(#T_25-/+3(P,C(M2E`_0C]'>5)#
-M2D0X8DM%26='>5)#2D5%8DM%26='>5)#2D518DM%26='>5)#2D598DM%26='
-M>5)#2D5G8DM%26<_/0H@/3])4T\M,C`R,BU*4#]"/T=Y4D-*16]B2T5)9T=Y
-M4D-*17-B2T5)9T=Y4D-*17=B2T5)9T=Y4D-*13!B2T5)9T=Y4D-*131B2T5)
-92T-G;TM#9V]+0V=O2T-G;TM#9V]+/ST*(```
-eofeof
-
-printf "%-40s", "test_data/mime_out2";
-    &test("$nkf -jM",$example{'test_data/mime_out2'},$example{'test_data/mime_out2.ans'},$example{'test_data/mime_out2.ans.alt'},$example{'test_data/mime_out2.ans.alt2'});
-# test_data/mime_out
+    &test("$nkf -jM",$example{'test_data/mime_out'},$example{'test_data/mime_out.ans'},$example{'test_data/mime_out.ans.alt'},$example{'test_data/mime_out.ans.alt2'},$example{'test_data/mime_out.ans.alt3'});
+# test_data/mime_out3
 
 $example{'test_data/mime_out3'} = "\x82\xD9\x82\xB0 A";
 
@@ -851,6 +803,26 @@ eofeof
 
 printf "%-40s", "test_data/multi-line";
     &test("$nkf -e",$example{'test_data/multi-line'},$example{'test_data/multi-line.ans'});
+# test_data/-Z4
+
+$example{'test_data/-Z4'} = unpack('u',<<'eofeof');
+MH:.AUJ'7H:*AIJ&\H:NAK*6AI:*EHZ6DI:6EIJ6GI:BEJ:6JI:NEK*6MI:ZE
+MKZ6PI;&ELJ6SI;2EM:6VI;>EN*6YI;JENZ6\I;VEOJ6_I<"EP:7"I<.EQ*7%
+MI<:EQZ7(I<FERJ7+I<RES:7.I<^ET*71I=*ETZ74I=6EUJ77I=BEV:7:I=NE
+KW*7=I=ZEWZ7@I>&EXJ7CI>2EY:7FI>>EZ*7II>JEZZ7LI>VE[Z7RI?.E]```
+eofeof
+
+$example{'test_data/-Z4.ans'} = unpack('u',<<'eofeof');
+MCJ&.HHZCCJ2.I8ZPCMZ.WXZGCK&.J(ZRCJF.LXZJCK2.JXZUCK:.MH[>CK>.
+MMX[>CKB.N([>CKF.N8[>CKJ.NH[>CKN.NX[>CKR.O([>CKV.O8[>CKZ.OH[>
+MCK^.OX[>CL".P([>CL&.P8[>CJ^.PH["CMZ.PX[#CMZ.Q([$CMZ.Q8[&CL>.
+MR([)CLJ.RH[>CLJ.WX[+CLN.WH[+CM^.S([,CMZ.S([?CLV.S8[>CLV.WX[.
+MCLZ.WH[.CM^.SX[0CM&.TH[3CJR.U(ZMCM6.KH[6CM>.V([9CMJ.VX[<CJ:.
+%W8ZSCMX`
+eofeof
+
+printf "%-40s", "test_data/-Z4    ";
+    &test("$nkf -eEZ4",$example{'test_data/-Z4'},$example{'test_data/-Z4.ans'});
 # test_data/nkf-19-bug-1
 
 $example{'test_data/nkf-19-bug-1'} = unpack('u',<<'eofeof');
@@ -914,6 +886,20 @@ eofeof
 
 printf "%-40s", "test_data/q-encode-softrap";
     &test("$nkf -jmQ",$example{'test_data/q-encode-softrap'},$example{'test_data/q-encode-softrap.ans'});
+# test_data/q-encode-utf-8
+
+$example{'test_data/q-encode-utf-8'} = <<'eofeof';
+=?utf-8?Q?=E3=81=82=E3=81=84=E3=81=86=E3=81=88=E3=81=8A?=
+=?utf-8?Q?=E3=81=8B=E3=81=8D=E3=81=8F=E3=81=91=E3=81=93?=
+eofeof
+
+$example{'test_data/q-encode-utf-8.ans'} = <<"eofeof";
+\xE3\x81\x82\xE3\x81\x84\xE3\x81\x86\xE3\x81\x88\xE3\x81\x8A
+\xE3\x81\x8B\xE3\x81\x8D\xE3\x81\x8F\xE3\x81\x91\xE3\x81\x93
+eofeof
+
+printf "%-40s", "test_data/q-encode-utf-8";
+    &test("$nkf",$example{'test_data/q-encode-utf-8'},$example{'test_data/q-encode-utf-8.ans'});
 # test_data/rot13
 
 $example{'test_data/rot13'} = unpack('u',<<'eofeof');
@@ -945,7 +931,7 @@ $example{'test_data/slash.ans'} = unpack('u',<<'eofeof');
 eofeof
 
 printf "%-40s", "test_data/slash";
-    &test("$nkf  ",$example{'test_data/slash'},$example{'test_data/slash.ans'});
+    &test("$nkf -j",$example{'test_data/slash'},$example{'test_data/slash.ans'});
 # test_data/z1space-0
 
 $example{'test_data/z1space-0'} = unpack('u',<<'eofeof');
@@ -997,6 +983,184 @@ eofeof
 
 printf "%-40s", "test_data/bug2273";
     &test("$nkf -e",$example{'test_data/bug2273'},$example{'test_data/bug2273.ans'});
+# test_data/forum15899
 
+$example{'test_data/forum15899'} = unpack('u',<<'eofeof');
+I6#H@XX&"XX&$XX&&XX&(XX&*XX&+XX&-XX&/XX&1XX&3XX&5(..!EPH`
+eofeof
+
+$example{'test_data/forum15899.ans'} = unpack('u',<<'eofeof');
+M6#H@/3])4T\M,C`R,BU*4#]"/T=Y4D-*0TEK2D-1;4I#9VM+:5%R2D,P:TQY
+=47A*1$UK3E)S;U%I06)*14EK3GAS;U%G/3T_/0H`
+eofeof
+
+printf "%-40s", "test_data/forum15899";
+    &test("$nkf -Mj",$example{'test_data/forum15899'},$example{'test_data/forum15899.ans'});
+# test_data/bugs10904
+
+$example{'test_data/bugs10904'} = unpack('u',<<'eofeof');
+M4W5B:F5C=#H@Z*FFZ:B3YY2HXX.AXX.\XX.KZ*&HZ:&,(.BIINFHD^>4J..#
+MH>.#O..#J^BAJ.FAC"#HJ:;IJ)/GE*CC@Z'C@[SC@ZOHH:CIH8P@Z*FFZ:B3
+3YY2HXX.AXX.\XX.KZ*&HZ:&,"@``
+eofeof
+
+$example{'test_data/bugs10904.ans'} = unpack('u',<<'eofeof');
+M4W5B:F5C=#H@/3])4T\M,C`R,BU*4#]"/T=Y4D-/,C0T33`Q4DI716A00U9R
+?4U0Q0V%H<V]1:4%B2D5)-V)J9WI45D5B2T5)/3\]"@``
+M(#T_25-/+3(P,C(M2E`_0C]'>5)#2E=%:%!#5G)35#%#86AS;U%I06)*14DW
+?8FIG>E1616Q94T4X2E=T2E!52G%'>6A#24$]/3\]"@``
+M(#T_25-/+3(P,C(M2E`_0C]'>5)#3S(T-$TP,5)*5T5H4$-6<E-4,4-A:'-O
+'46<]/3\]"@``
+eofeof
+
+printf "%-40s", "test_data/bugs10904";
+    &test("$nkf -Mj",$example{'test_data/bugs10904'},$example{'test_data/bugs10904.ans'});
+
+printf "%-40s", "test_data/ruby-dev:39722";
+    &test("$nkf -MjW",<<eom,<<eom);
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\xE3\x81\x82
+eom
+=?US-ASCII?Q?aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa?=
+ =?US-ASCII?Q?aaaaaaaaaaaaaaaaa?= =?ISO-2022-JP?B?GyRCJCIbKEI=?=
+eom
+# test_data/bug19779
+
+$example{'test_data/bug19779'} = unpack('u',<<'eofeof');
+2&R1","$;*$(*&R1"7V8;*$(*
+eofeof
+
+$example{'test_data/bug19779.ans'} = unpack('u',<<'eofeof');
+M/3])4T\M,C`R,BU*4#]"/T=Y4D--0T5B2T5)/3\]"CT_25-/+3(P,C(M2E`_
+10C]'>5)#6#)98DM%23T_/0H`
+eofeof
+
+printf "%-40s",  "test_data/bug19779    ";
+    &test("$nkf -jM",$example{'test_data/bug19779'},$example{'test_data/bug19779.ans'});
+
+printf "%-40s",  "[nkf-forum:47327]    ";
+    &test("$nkf -wM",pack('H*','feffd852de76d814dc45000a'),"=?UTF-8?B?8KSptvCVgYU=?=\n");
+
+printf "%-40s",  "[nkf-forum:47334]    ";
+    &test("$nkf -w",pack('H*','feff006100620063000a'),"abc\n");
+
+printf "%-40s",  "[nkf-bug:20079]    ";
+    &test("$nkf -jSxM","\xBB \xBB","=?ISO-2022-JP?B?GyhJOxsoQiAbKEk7GyhC?=");
+
+printf "%-40s",  "[nkf-bug:20079]    ";
+    &test("$nkf -SxMw8","\xBB \xBB","=?UTF-8?B?77u/7727IO+9uw==?=");
+
+printf "%-40s",  "[nkf-forum:48850]    ";
+    &test("$nkf -jSM",
+	"From: \x82\xA0\x82\xA0\x82\xA0\x82\xA0\x82\xA0\x82\xA0\x82\xA0\x82\xA0\x82\xA0" .
+	" <x-xxxx@xxxxxxxxxxxx.co.jp>\n",
+	"From: =?ISO-2022-JP?B?GyRCJCIkIiQiJCIkIiQiJCIkIiQiGyhC?=" .
+	" <x-xxxx@xxxxxxxxxxxx.co.jp>\n");
+
+printf "%-40s",  "[nkf-bug:21393]-x  ";
+    &test("$nkf --ic=UTF-8 --oc=CP932",
+    "\xEF\xBD\xBC\xEF\xBE\x9E\xEF\xBD\xAC\xEF\xBD\xB0\xEF\xBE\x8F\xEF\xBE\x9D\xEF\xBD\xA5\xEF\xBE\x8E\xEF\xBE\x9F\xEF\xBE\x83\xEF\xBE\x84\xEF\xBD\xA1",
+    "\xBC\xDE\xAC\xB0\xCF\xDD\xA5\xCE\xDF\xC3\xC4\xA1");
+
+printf "%-40s",  "[nkf-bug:21393]-X  ";
+    &test("$nkf --ic=UTF-8 --oc=CP932 -X",
+    "\xEF\xBD\xBC\xEF\xBE\x9E\xEF\xBD\xAC\xEF\xBD\xB0\xEF\xBE\x8F\xEF\xBE\x9D\xEF\xBD\xA5\xEF\xBE\x8E\xEF\xBE\x9F\xEF\xBE\x83\xEF\xBE\x84\xEF\xBD\xA1",
+    "\x83W\x83\x83\x81[\x83}\x83\x93\x81E\x83|\x83e\x83g\x81B");
+
+    if (!NKF) {
+printf "%-40s", "Guess NL";
+&command_tests(
+	"$nkf --guess","none",      "ASCII\n",
+	"$nkf --guess","\n",        "ASCII (LF)\n",
+	"$nkf --guess","\n\n",      "ASCII (LF)\n",
+	"$nkf --guess","\n\r",      "ASCII (MIXED NL)\n",
+	"$nkf --guess","\n\r\n",    "ASCII (MIXED NL)\n",
+	"$nkf --guess","\n.\n",     "ASCII (LF)\n",
+	"$nkf --guess","\n.\r",     "ASCII (MIXED NL)\n",
+	"$nkf --guess","\n.\r\n",   "ASCII (MIXED NL)\n",
+	"$nkf --guess","\r",        "ASCII (CR)\n",
+	"$nkf --guess","\r\r",      "ASCII (CR)\n",
+	"$nkf --guess","\r\r\n",    "ASCII (MIXED NL)\n",
+	"$nkf --guess","\r.\n",     "ASCII (MIXED NL)\n",
+	"$nkf --guess","\r.\r",     "ASCII (CR)\n",
+	"$nkf --guess","\r.\r\n",   "ASCII (MIXED NL)\n",
+	"$nkf --guess","\r\n",      "ASCII (CRLF)\n",
+	"$nkf --guess","\r\n\n",    "ASCII (MIXED NL)\n",
+	"$nkf --guess","\r\n\r",    "ASCII (MIXED NL)\n",
+	"$nkf --guess","\r\n\r\n",  "ASCII (CRLF)\n",
+	"$nkf --guess","\r\n.\n",   "ASCII (MIXED NL)\n",
+	"$nkf --guess","\r\n.\r",   "ASCII (MIXED NL)\n",
+	"$nkf --guess","\r\n.\r\n", "ASCII (CRLF)\n");
+    }
+
+printf "%-40s", "Convert NL to LF";
+&command_tests(
+	"$nkf -jLu","none",      "none",
+	"$nkf -jLu","\n",        "\n",
+	"$nkf -jLu","\n\n",      "\n\n",
+	"$nkf -jLu","\n\r",      "\n\n",
+	"$nkf -jLu","\n\r\n",    "\n\n",
+	"$nkf -jLu","\n.\n",     "\n.\n",
+	"$nkf -jLu","\n.\r",     "\n.\n",
+	"$nkf -jLu","\n.\r\n",   "\n.\n",
+	"$nkf -jLu","\r",        "\n",
+	"$nkf -jLu","\r\r",      "\n\n",
+	"$nkf -jLu","\r\r\n",    "\n\n",
+	"$nkf -jLu","\r.\n",     "\n.\n",
+	"$nkf -jLu","\r.\r",     "\n.\n",
+	"$nkf -jLu","\r.\r\n",   "\n.\n",
+	"$nkf -jLu","\r\n",      "\n",
+	"$nkf -jLu","\r\n\n",    "\n\n",
+	"$nkf -jLu","\r\n\r",    "\n\n",
+	"$nkf -jLu","\r\n\r\n",  "\n\n",
+	"$nkf -jLu","\r\n.\n",   "\n.\n",
+	"$nkf -jLu","\r\n.\r",   "\n.\n",
+	"$nkf -jLu","\r\n.\r\n", "\n.\n");
+
+printf "%-40s", "Convert NL to LF";
+&command_tests(
+	"$nkf -jLm","none",      "none",
+	"$nkf -jLm","\n",        "\r",
+	"$nkf -jLm","\n\n",      "\r\r",
+	"$nkf -jLm","\n\r",      "\r\r",
+	"$nkf -jLm","\n\r\n",    "\r\r",
+	"$nkf -jLm","\n.\n",     "\r.\r",
+	"$nkf -jLm","\n.\r",     "\r.\r",
+	"$nkf -jLm","\n.\r\n",   "\r.\r",
+	"$nkf -jLm","\r",        "\r",
+	"$nkf -jLm","\r\r",      "\r\r",
+	"$nkf -jLm","\r\r\n",    "\r\r",
+	"$nkf -jLm","\r.\n",     "\r.\r",
+	"$nkf -jLm","\r.\r",     "\r.\r",
+	"$nkf -jLm","\r.\r\n",   "\r.\r",
+	"$nkf -jLm","\r\n",      "\r",
+	"$nkf -jLm","\r\n\n",    "\r\r",
+	"$nkf -jLm","\r\n\r",    "\r\r",
+	"$nkf -jLm","\r\n\r\n",  "\r\r",
+	"$nkf -jLm","\r\n.\n",   "\r.\r",
+	"$nkf -jLm","\r\n.\r",   "\r.\r",
+	"$nkf -jLm","\r\n.\r\n", "\r.\r");
+
+printf "%-40s", "Convert NL to CRLF";
+&command_tests(
+	"$nkf -jLw","none",      "none",
+	"$nkf -jLw","\n",        "\r\n",
+	"$nkf -jLw","\n\n",      "\r\n\r\n",
+	"$nkf -jLw","\n\r",      "\r\n\r\n",
+	"$nkf -jLw","\n\r\n",    "\r\n\r\n",
+	"$nkf -jLw","\n.\n",     "\r\n.\r\n",
+	"$nkf -jLw","\n.\r",     "\r\n.\r\n",
+	"$nkf -jLw","\n.\r\n",   "\r\n.\r\n",
+	"$nkf -jLw","\r",        "\r\n",
+	"$nkf -jLw","\r\r",      "\r\n\r\n",
+	"$nkf -jLw","\r\r\n",    "\r\n\r\n",
+	"$nkf -jLw","\r.\n",     "\r\n.\r\n",
+	"$nkf -jLw","\r.\r",     "\r\n.\r\n",
+	"$nkf -jLw","\r.\r\n",   "\r\n.\r\n",
+	"$nkf -jLw","\r\n",      "\r\n",
+	"$nkf -jLw","\r\n\n",    "\r\n\r\n",
+	"$nkf -jLw","\r\n\r",    "\r\n\r\n",
+	"$nkf -jLw","\r\n\r\r\n",  "\r\n\r\n\r\n",
+	"$nkf -jLw","\r\n.\n",   "\r\n.\r\n",
+	"$nkf -jLw","\r\n.\r",   "\r\n.\r\n",
+	"$nkf -jLw","\r\n.\r\n", "\r\n.\r\n");
 # end
-
