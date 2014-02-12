@@ -1,3 +1,22 @@
+nkf (2.12-1) unstable; urgency=low
+
+  * New upstream release
+  * Change debhelper version 5 to 8.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Fri, 29 Jun 2012 13:20:56 +0900
+
+nkf (2.11-1) unstable; urgency=low
+
+  * New upstream release
+
+ --  <knok@daionet.gr.jp>  Wed, 18 May 2011 05:57:06 +0000
+
+nkf (2.07-2) unstable; urgency=low
+
+  * Fixed manual bug, closes: #473916.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Wed, 14 May 2008 17:07:28 +0900
+
 nkf (2.07-1) unstable; urgency=low
 
   * New upstream release

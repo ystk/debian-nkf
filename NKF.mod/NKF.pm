@@ -1,25 +1,24 @@
-## Copyright (C) 1996,1998
-## Copyright (C) 2002
-## $BO"Mm@h!'(B $BN05eBg3X>pJs9)3X2J(B $B2OLn(B $B??<#(B  mime/X0208 support
-## $B!J(BE-Mail Address: kono@ie.u-ryukyu.ac.jp$B!K(B
-## $BO"Mm@h!'(B COW for DOS & Win16 & Win32 & OS/2
-## $B!J(BE-Mail Address: GHG00637@niftyserve.or.p$B!K(B
-##    
-##    $B$3$N%=!<%9$N$$$+$J$kJ#<L!$2~JQ!$=$@5$b5vBz$7$^$9!#$?$@$7!"(B
-##    $B$=$N:]$K$O!"C/$,9W8%$7$?$r<($9$3$NItJ,$r;D$9$3$H!#(B
-##    $B:FG[I[$d;(;o$NIUO?$J$I$NLd$$9g$o$;$bI,MW$"$j$^$;$s!#(B
-##    $B1DMxMxMQ$b>e5-$KH?$7$J$$HO0O$G5v2D$7$^$9!#(B
-##    $B%P%$%J%j$NG[I[$N:]$K$O(Bversion message$B$rJ]B8$9$k$3$H$r>r7o$H$7$^$9!#(B
-##    $B$3$N%W%m%0%i%`$K$D$$$F$OFC$K2?$NJ]>Z$b$7$J$$!"0-$7$+$i$:!#(B
-##    
-##    Everyone is permitted to do anything on this program
-##    including copying, modifying, improving, 
-##    as long as you don't try to pretend that you wrote it.
-##    i.e., the above copyright notice has to appear in all copies.  
-##    Binar y distribution requires original version messages.
-##    You don't have to ask before copying, redistribution or publishing.
-##    THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE.
-
+# Copyright (c) 1987, Fujitsu LTD. (Itaru ICHIKAWA).
+# Copyright (c) 1996-2010, The nkf Project.
+# All rights reserved.
+#
+# This software is provided 'as-is', without any express or implied
+# warranty. In no event will the authors be held liable for any damages
+# arising from the use of this software.
+#
+# Permission is granted to anyone to use this software for any purpose,
+# including commercial applications, and to alter it and redistribute it
+# freely, subject to the following restrictions:
+#
+# 1. The origin of this software must not be misrepresented; you must not
+# claim that you wrote the original software. If you use this software
+# in a product, an acknowledgment in the product documentation would be
+# appreciated but is not required.
+#
+# 2. Altered source versions must be plainly marked as such, and must not be
+# misrepresented as being the original software.
+#
+# 3. This notice may not be removed or altered from any source distribution.
 
 package NKF;
 
@@ -36,7 +35,7 @@ require DynaLoader;
 @EXPORT = qw(
 	nkf	nkf_continue	inputcode
 );
-$VERSION = '2.07';
+$VERSION = '2.12';
 
 bootstrap NKF $VERSION;
 
@@ -48,8 +47,8 @@ bootstrap NKF $VERSION;
 __END__
 
 #
-# =begin $B$+$i(B =begin COMMAND $B$^$G$O(B Perl/NKF $B$N%I%-%e%a%s%H(B
-# =begin COMMAND $B$+$i(B =end $B$^$G$O(B nkf $B%3%^%s%I$N%I%-%e%a%s%H(B
+# =begin ¤«¤é =begin COMMAND ¤Þ¤Ç¤Ï Perl/NKF ¤Î¥É¥­¥å¥á¥ó¥È
+# =begin COMMAND ¤«¤é =end ¤Þ¤Ç¤Ï nkf ¥³¥Þ¥ó¥É¤Î¥É¥­¥å¥á¥ó¥È
 # 
 
 =head1 NAME
@@ -73,7 +72,7 @@ nkf - Network Kanji Filter
 
 =begin COMMAND
 
-  nkf B<[-butjnesliohrTVvwWJESZxXFfmMBOcdILg]> B<[>I<file ...>B<]>
+nkf B<[-butjnesliohrTVvwWJESZxXFfmMBOcdILg]> B<[>I<file ...>B<]>
 
 =end
 
@@ -81,7 +80,7 @@ nkf - Network Kanji Filter
 
 =begin
 
-This is a Perl Extension version of nkf (Netowrk Kanji Filter).
+This is a Perl Extension version of nkf (Network Kanji Filter).
 It converts the last argument and return converted result. Conversion
 details are specified by flags before the last argument.
 
@@ -89,10 +88,10 @@ details are specified by flags before the last argument.
 
 B<Nkf> is a yet another kanji code converter among networks, hosts and terminals.
 It converts input kanji code to designated kanji code
-such as ISO-2022-JP, Shift_JIS, EUC-JP, UTF-8 or UTF-16.
+such as ISO-2022-JP, Shift_JIS, EUC-JP, UTF-8, UTF-16 or UTF-32.
 
 One of the most unique faculty of B<nkf> is the guess of the input kanji encodings.
-It currently recognizes ISO-2022-JP, Shift_JIS, EUC-JP, UTF-8 and UTF-16.
+It currently recognizes ISO-2022-JP, Shift_JIS, EUC-JP, UTF-8, UTF-16 and UTF-32.
 So users needn't set the input kanji code explicitly.
 
 By default, X0201 kana is converted into X0208 kana.
@@ -104,40 +103,49 @@ To accept X0201 in Shift_JIS, use B<-X>, B<-x> or B<-S>.
 
 =over
 
-=item B<-b -u>
+=item B<-J -S -E -W -W16 -W32 -j -s -e -w -w16 -w32>
 
-Output is buffered (DEFAULT), Output is unbuffered.
-
-=item B<-j -s -e -w -w16>
-
-Output code is ISO-2022-JP (7bit JIS), Shift_JIS, EUC-JP,
-UTF-8N, UTF-16BE.
-Without this option and compile option, ISO-2022-JP is assumed.
-
-=item B<-J -S -E -W -W16>
-
-Input assumption is JIS 7 bit, Shift_JIS, EUC-JP,
-UTF-8, UTF-16LE.
+Specify input and output encodings. Upper case is input.
+cf. --ic and --oc.
 
 =over
 
 =item B<-J>
 
-Assume  JIS input. It also accepts EUC-JP.
-This is the default. This flag does not exclude Shift_JIS.
+ISO-2022-JP (JIS code).
 
 =item B<-S>
 
-Assume Shift_JIS and X0201 kana input. It also accepts JIS.
+Shift_JIS and JIS X 0201 kana.
 EUC-JP is recognized as X0201 kana. Without B<-x> flag,
-X0201 kana (halfwidth kana) is converted into X0208.
+JIS X 0201 Katakana (a.k.a.halfwidth kana) is converted into JIS X 0208.
+If you use Windows, see Windows-31J (CP932).
 
 =item B<-E>
 
-Assume EUC-JP input. It also accepts JIS.
-Same as -J.
+EUC-JP.
+
+=item B<-W>
+
+UTF-8N.
+
+=item B<-W16[BL][0]>
+
+UTF-16.
+B or L gives whether Big Endian or Little Endian.
+0 gives whther put BOM or not.
+
+=item B<-W32[BL][0]>
+
+UTF-32.
+B or L gives whether Big Endian or Little Endian.
+0 gives whther put BOM or not.
 
 =back
+
+=item B<-b -u>
+
+Output is buffered (DEFAULT), Output is unbuffered.
 
 =item B<-t>
 
@@ -145,11 +153,23 @@ No conversion.
 
 =item B<-i[@B]>
 
-Specify the Esc Seq for JIS X 0208-1978/83. (DEFAULT B)
+Specify the escape sequence for JIS X 0208.
 
-=item B<-o[BJH]>
+=over
 
-Specify the Esc Seq for ASCII/Roman. (DEFAULT B)
+=item B<-i@>
+
+Use ESC ( @. (JIS X 0208-1978)
+
+=item B<-iB>
+
+Use ESC ( B. (JIS X 0208-1983/1990 DEFAULT)
+
+=back
+
+=item B<-o[BJ]>
+
+Specify the escape sequence for US-ASCII/JIS X 0201 Roman. (DEFAULT B)
 
 =item B<-r>
 
@@ -177,10 +197,6 @@ Katakana to Hiragana and Hiragana to Katakana conversion.
 
 Text mode output (MS-DOS)
 
-=item B<-l>
-
-ISO8859-1 (Latin-1) support
-
 =item B<-f[I<m> [- I<n>]]>
 
 Folding on I<m> length with I<n> margin in a line.
@@ -202,24 +218,23 @@ Convert X0208 alphabet to ASCII.
 
 =item B<-Z1>
 
-Converts X0208 kankaku to single ASCII space.
+Convert X0208 kankaku to single ASCII space.
 
 =item B<-Z2>
 
-Converts X0208 kankaku to double ASCII spaces.
+Convert X0208 kankaku to double ASCII spaces.
 
 =item B<-Z3>
 
-Replacing Fullwidth >, <, ", & into '&gt;', '&lt;', '&quot;', '&amp;' as in HTML.
+Replacing fullwidth >, <, ", & into '&gt;', '&lt;', '&quot;', '&amp;' as in HTML.
 
 =back
 
 =item B<-X -x>
 
-Assume X0201 kana in MS-Kanji.
 With B<-X> or without this option, X0201 is converted into X0208 Kana.
 With B<-x>, try to preserve X0208 kana and do not convert X0201 kana to X0208.
-In JIS output, ESC-(-I is used. In EUC output, SSO is used.
+In JIS output, ESC-(-I is used. In EUC output, SS2 is used.
 
 =item B<-B[0-2]>
 
@@ -230,11 +245,11 @@ Useful when your site is using old B-News Nihongo patch.
 
 =item B<-B1>
 
-allows any char after ESC-( or ESC-$.
+allows any chars after ESC-( or ESC-$.
 
 =item B<-B2>
 
-forces ASCII after NL.
+force ASCII after NL.
 
 =back
 
@@ -283,7 +298,7 @@ Kanji conversion is performed before encoding, so this cannot be used as a pictu
 
 =item B<-MQ>
 
-Perfome quoted encoding.
+Perform quoted encoding.
 
 =back
 
@@ -316,20 +331,20 @@ Without this option, nkf doesn't convert line breaks.
 
 =item B<--fj --unix --mac --msdos --windows>
 
-convert for these system
+Convert for these systems.
 
 =item B<--jis --euc --sjis --mime --base64>
 
-convert for named code
+Convert to named code.
 
 =item B<--jis-input --euc-input --sjis-input --mime-input --base64-input>
 
-assume input system
+Assume input system
 
 =item B<--ic=I<input codeset> --oc=I<output codeset>>
 
 Set the input or output codeset.
-NKF supports following codesets and those codeset name are case insensitive.
+NKF supports following codesets and those codeset names are case insensitive.
 
 =over
 
@@ -351,11 +366,11 @@ Microsoft Version of EUC-JP.
 
 =item Shift_JIS
 
-a.k.a. SJIS, MS-Kanji
+a.k.a. SJIS, MS_Kanji
 
-=item CP932
+=item Windows-31J
 
-a.k.a. Windows-31J
+a.k.a. CP932
 
 =item UTF-8
 
@@ -368,6 +383,10 @@ UTF-8 without BOM
 =item UTF-8-BOM
 
 UTF-8 with BOM
+
+=item UTF8-MAC (input only)
+
+decomposed UTF-8
 
 =item UTF-16
 
@@ -389,7 +408,25 @@ UTF-16 Little Endian without BOM
 
 UTF-16 Little Endian with BOM
 
-=item UTF8-MAC (input only)
+=item UTF-32
+
+same as UTF-32BE
+
+=item UTF-32BE
+
+UTF-32 Big Endian without BOM
+
+=item UTF-32BE-BOM
+
+UTF-32 Big Endian with BOM
+
+=item UTF-32LE
+
+UTF-32 Little Endian without BOM
+
+=item UTF-32LE-BOM
+
+UTF-32 Little Endian with BOM
 
 =back
 
@@ -416,7 +453,7 @@ When Unicode to Unicode conversion,
 with this and -x option, nkf can be used as UTF converter.
 (In other words, without this and -x option, nkf doesn't save some characters)
 
-When nkf convert string which related to path, you should use this opion.
+When nkf converts strings that related to path, you should use this opion.
 
 =item B<--cap-input>
 
@@ -436,11 +473,11 @@ Decode character reference, such as "&#....;".
 
 Overwrite B<original> listed files by filtered result.
 
-B<Note> --overwrite preserves timestamp of original files.
+B<Note> --overwrite preserves timestamps of original files.
 
-=item B<--guess>
+=item B<--guess=[12]>
 
-Print guessed encoding.
+Print guessed encoding and newline. (2 is default, 1 is only encoding)
 
 =item B<--help>
 
@@ -460,8 +497,9 @@ Ignore rest of -option.
 
 =head1 AUTHOR
 
-Copyright (C) 1987, FUJITSU LTD. (I.Ichikawa),2000 S. Kono, COW
-Copyright (C) 2002-2006 Kono, Furukawa, Naruse, mastodon
+Copyright (c) 1987, Fujitsu LTD. (Itaru ICHIKAWA).
+
+Copyright (c) 1996-2010, The nkf Project.
 
 =begin
 

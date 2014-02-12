@@ -1,175 +1,183 @@
 NAME
-    nkf - $B%M%C%H%o!<%/MQ4A;z%3!<%IJQ49%U%#%k%?(B v2.0.7
+    nkf - ¥Í¥Ã¥È¥ï¡¼¥¯ÍÑ´Á»ú¥³¡¼¥ÉÊÑ´¹¥Õ¥£¥ë¥¿
 
 SYNOPSIS
-      nkf B<[-butjnesliohrTVvwWJESZxXFfmMBOcdILg]> B<[>I<file ...>B<]>
+    nkf [-butjnesliohrTVvwWJESZxXFfmMBOcdILg] [*file ...*]
 
 DESCRIPTION
     nkf
-    $B$O%M%C%H%o!<%/$G%a!<%k$d%K%e!<%9$NFI$_=q$-$r$9$k$?$a$K:n$i$l$?!"4A;z%3!<(B
-    $B%I$NJQ49%U%#%k%?$G$"$k!#(B
+    ¤Ï¥Í¥Ã¥È¥ï¡¼¥¯¤Ç¥á¡¼¥ë¤ä¥Ë¥å¡¼¥¹¤ÎÆÉ¤ß½ñ¤­¤ò¤¹¤ë¤¿¤á¤Ëºî¤é¤ì¤¿¡¢´Á»ú¥³¡¼
+    ¥É¤ÎÊÑ´¹¥Õ¥£¥ë¥¿¤Ç¤¢¤ë¡£
 
-    $B$3$N(Bnkf$B$NFCD'$H$7$F$O!"F~NO4A;z%3!<%I7O$NE}7WE*$J<+F0G'<15!G=$,$"$k!#(B
-    $B$3$N$?$a!"MxMQ<T$O!"F~NO4A;z%3!<%I7O$,2?$G$"$k$+$rCN$i$J$/$F$b!"=PNO4A;z(B
-    $B%3!<%I7O$N$_;XDj$9$l$PNI$$$3$H$K$J$k!#(B
-    $B$?$@!"$3$NH=Dj5!9=$O!"M}O@E*$K$O40A4$G$O$J$$$,!"DL>o$N%K%e!<%9$d%a!<%k$N(B
-    $B%a%C%;!<%8$K$D$$$F$O3N<B$KF0:n$9$k0BA4$J$b$N$K$O$J$C$F$$$k!#(B
+    ¤³¤Înkf¤ÎÆÃÄ§¤È¤·¤Æ¤Ï¡¢ÆþÎÏ´Á»ú¥³¡¼¥É·Ï¤ÎÅý·×Åª¤Ê¼«Æ°Ç§¼±µ¡Ç½¤¬¤¢¤ë¡£
+    ¤³¤Î¤¿¤á¡¢ÍøÍÑ¼Ô¤Ï¡¢ÆþÎÏ´Á»ú¥³¡¼¥É·Ï¤¬²¿¤Ç¤¢¤ë¤«¤òÃÎ¤é¤Ê¤¯¤Æ¤â¡¢½ÐÎÏ´Á»ú
+    ¥³¡¼¥É·Ï¤Î¤ß»ØÄê¤¹¤ì¤ÐÎÉ¤¤¤³¤È¤Ë¤Ê¤ë¡£
+    ¤¿¤À¡¢¤³¤ÎÈ½Äêµ¡¹½¤Ï¡¢ÍýÏÀÅª¤Ë¤Ï´°Á´¤Ç¤Ï¤Ê¤¤¤¬¡¢ÄÌ¾ï¤Î¥Ë¥å¡¼¥¹¤ä¥á¡¼¥ë¤Î
+    ¥á¥Ã¥»¡¼¥¸¤Ë¤Ä¤¤¤Æ¤Ï³Î¼Â¤ËÆ°ºî¤¹¤ë°ÂÁ´¤Ê¤â¤Î¤Ë¤Ï¤Ê¤Ã¤Æ¤¤¤ë¡£
 
-    $B8=:_!"(Bnkf$B$,G'<1$G$-$kF~NO$N4A;z%3!<%I7O$O!"$$$o$f$k(B JIS $B%3!<%I(B
-    (ISO-2022-JP $B$K4p$E$/$b$N(B)$B!"(BShift_JIS (MS $B4A;z%3!<%I(B)$B!"(B $BF|K\8l(B EUC (AT&T
-    $B%3!<%I(B)$B!"(BUTF-8$B!"(BUTF-16 $B$N$$$:$l$+$G$"$k!#(B
-    $B=PNO$9$k4A;z%3!<%I7O$b!"$3$l$i$G$"$k!#(B
-    $BF~NO$O!"%U%!%$%k$r;XDj$7$J$1$l$P!"I8=`F~NO$H$J$k!#(B
-    $B=PNO$OI8=`=PNO$G$"$k!#(B
+    ¸½ºß¡¢nkf¤¬Ç§¼±¤Ç¤­¤ëÆþÎÏ¤Î´Á»ú¥³¡¼¥É·Ï¤Ï¡¢¤¤¤ï¤æ¤ë JIS ¥³¡¼¥É
+    (ISO-2022-JP ¤Ë´ð¤Å¤¯¤â¤Î)¡¢Shift_JIS (MS ´Á»ú¥³¡¼¥É)¡¢ ÆüËÜ¸ì EUC (AT&T
+    ¥³¡¼¥É)¡¢UTF-8¡¢UTF-16 ¤Î¤¤¤º¤ì¤«¤Ç¤¢¤ë¡£
+    ½ÐÎÏ¤¹¤ë´Á»ú¥³¡¼¥É·Ï¤â¡¢¤³¤ì¤é¤Ç¤¢¤ë¡£
+    ÆþÎÏ¤Ï¡¢¥Õ¥¡¥¤¥ë¤ò»ØÄê¤·¤Ê¤±¤ì¤Ð¡¢É¸½àÆþÎÏ¤È¤Ê¤ë¡£
+    ½ÐÎÏ¤ÏÉ¸½à½ÐÎÏ¤Ç¤¢¤ë¡£
 
 OPTIONS
-    $B;XDj$G$-$k%*%W%7%g%s$O!"0J2<$NDL$j!#(B -mu $B$N$h$&$KB3$1$k$3$H$,$G$-$k!#(B
+    »ØÄê¤Ç¤­¤ë¥ª¥×¥·¥ç¥ó¤Ï¡¢°Ê²¼¤ÎÄÌ¤ê¡£ -mu ¤Î¤è¤¦¤ËÂ³¤±¤ë¤³¤È¤¬¤Ç¤­¤ë¡£
 
-    -j  JIS $B%3!<%I$r=PNO$9$k!#(B($B%G%U%)%k%H(B)
+    -j  JIS ¥³¡¼¥É¤ò½ÐÎÏ¤¹¤ë¡£
 
-    -e  EUC $B%3!<%I$r=PNO$9$k!#(B
+    -e  EUC ¥³¡¼¥É¤ò½ÐÎÏ¤¹¤ë¡£
 
-    -s  Shift_JIS $B%3!<%I$r=PNO$9$k!#(B
+    -s  Shift_JIS ¥³¡¼¥É¤ò½ÐÎÏ¤¹¤ë¡£
 
     -w -w8[0] -w16[BL][0]
-        Unicode $B$r=PNO$9$k!#(B
+        Unicode ¤ò½ÐÎÏ¤¹¤ë¡£
 
         -w -w80
-            UTF8 $B%3!<%I$r=PNO$9$k!#(B (BOM $BL5$7(B)
+            UTF8 ¥³¡¼¥É¤ò½ÐÎÏ¤¹¤ë¡£ (BOM Ìµ¤·)
 
-        -w8 UTF8 $B%3!<%I$r=PNO$9$k!#(B
+        -w8 UTF8 ¥³¡¼¥É¤ò½ÐÎÏ¤¹¤ë¡£
 
         -w16 -w16B0
-            UTF16 $B%3!<%I$r=PNO$9$k!#(B (Big Endian / BOM $BL5$7(B)
+            UTF16 ¥³¡¼¥É¤ò½ÐÎÏ¤¹¤ë¡£ (Big Endian / BOM Ìµ¤·)
 
         -w16B
-            UTF16 $B%3!<%I$r=PNO$9$k!#(B (Big Endian / BOM $BM-$j(B)
+            UTF16 ¥³¡¼¥É¤ò½ÐÎÏ¤¹¤ë¡£ (Big Endian / BOM Í­¤ê)
 
         -w16L
-            UTF16 $B%3!<%I$r=PNO$9$k!#(B (Little Endian / BOM $BM-$j(B)
+            UTF16 ¥³¡¼¥É¤ò½ÐÎÏ¤¹¤ë¡£ (Little Endian / BOM Í­¤ê)
 
         -w16L0
-            UTF16 $B%3!<%I$r=PNO$9$k!#(B (Little Endian / BOM $BL5$7(B)
+            UTF16 ¥³¡¼¥É¤ò½ÐÎÏ¤¹¤ë¡£ (Little Endian / BOM Ìµ¤·)
 
     -m[BQSN0]
-        MIME $B$r2rFI$9$k!#(B($B%G%U%)%k%H(B) ISO-2022-JP (B encode) $B$H(B ISO-8859-1
-        (Q encode) $B$N$_$r2rFI$9$k!#(B ISO-8859-1 (Latin-1) $B$r2rFI$9$k;~$O!"(B-l
-        $B%U%i%0$bI,MW$G$"$k!#(B -m0 $B$G$O(B MIME $B$r2rFI$7$J$$!#(B -mB, -mQ
-        $B$G$O!"(BBASE64, Q encode $B$5$l$F$$$k$b$N$H$7$F=hM}$9$k!#(B
+        MIME ¤ò²òÆÉ¤¹¤ë¡£(¥Ç¥Õ¥©¥ë¥È) ISO-2022-JP (B encode) ¤È ISO-8859-1
+        (Q encode) ¤Î¤ß¤ò²òÆÉ¤¹¤ë¡£ ISO-8859-1 (Latin-1) ¤ò²òÆÉ¤¹¤ë»þ¤Ï¡¢-l
+        ¥Õ¥é¥°¤âÉ¬Í×¤Ç¤¢¤ë¡£ -m0 ¤Ç¤Ï MIME ¤ò²òÆÉ¤·¤Ê¤¤¡£ -mB, -mQ
+        ¤Ç¤Ï¡¢BASE64, Q encode ¤µ¤ì¤Æ¤¤¤ë¤â¤Î¤È¤·¤Æ½èÍý¤¹¤ë¡£
 
-        -mB MIME base64 stream $B$r2rFI$9$k!#(B $B%X%C%@$J$I$O<h$j=|$/$3$H!#(B
+        -mB MIME base64 stream ¤ò²òÆÉ¤¹¤ë¡£ ¥Ø¥Ã¥À¤Ê¤É¤Ï¼è¤ê½ü¤¯¤³¤È¡£
 
-        -mQ MIME quoted stream $B$r2rFI$9$k!#(B
+        -mQ MIME quoted stream ¤ò²òÆÉ¤¹¤ë¡£
 
-        -mS MIME $B$N%A%'%C%/$r87$7$/$9$k(B ($B%G%U%)%k%H(B)
+        -mS MIME ¤Î¥Á¥§¥Ã¥¯¤ò¸·¤·¤¯¤¹¤ë (¥Ç¥Õ¥©¥ë¥È)
 
-        -mN MIME $B$N%A%'%C%/$r4K$/$9$k(B
+        -mN MIME ¤Î¥Á¥§¥Ã¥¯¤ò´Ë¤¯¤¹¤ë
 
-        -m0 MIME $B$r2rFI$7$J$$!#(B
+        -m0 MIME ¤ò²òÆÉ¤·¤Ê¤¤¡£
 
-        -mS $B$O!"@k8@$NFbMF$H!"$=$N8e$KB3$/(B encoded-text
-        $B$N@09g@-$r%A%'%C%/$9$k!#(B -mN $B$O!"2~9T$G@Z$i$l$?(B MIME
-        $B$J$I$b2rFI$9$k!#2rFI$,;_$^$i$J$$$3$H$b$"$k!#(B
+        -mS ¤Ï¡¢Àë¸À¤ÎÆâÍÆ¤È¡¢¤½¤Î¸å¤ËÂ³¤¯ encoded-text
+        ¤ÎÀ°¹çÀ­¤ò¥Á¥§¥Ã¥¯¤¹¤ë¡£ -mN ¤Ï¡¢²þ¹Ô¤ÇÀÚ¤é¤ì¤¿ MIME
+        ¤Ê¤É¤â²òÆÉ¤¹¤ë¡£²òÆÉ¤¬»ß¤Þ¤é¤Ê¤¤¤³¤È¤â¤¢¤ë¡£
 
     -M[BQ]
-        MIME $B$KJQ49$9$k!#(B JIS $B$K%3!<%IJQ49$7$F$+$i(B BASE64 $B$5$l$k!#(B
+        MIME ¤ËÊÑ´¹¤¹¤ë¡£
 
-        -M  $B%X%C%@7A<0$KJQ49$9$k(B
+        -M  ¥Ø¥Ã¥À·Á¼°¤ËÊÑ´¹¤¹¤ë
 
-        -MB base64 stream $B$KJQ49$9$k(B
+        -MB base64 stream ¤ËÊÑ´¹¤¹¤ë
 
-        -MQ Quoted stream $B$KJQ49$9$k(B
+        -MQ Quoted stream ¤ËÊÑ´¹¤¹¤ë
 
     -J -E -S -W
-        $B4|BT$5$l$kF~NO%3!<%I$N@-<A$r;XDj$9$k!#(B
+        ´üÂÔ¤µ¤ì¤ëÆþÎÏ¥³¡¼¥É¤ÎÀ­¼Á¤ò»ØÄê¤¹¤ë¡£
 
-        -J  ISO-2022-JP $B$r2>Dj$9$k!#(B
+        -J  ISO-2022-JP ¤ò²¾Äê¤¹¤ë¡£
 
-        -E  $BF|K\8l(B EUC (AT&T) $B$r2>Dj$9$k!#(B
+        -E  ÆüËÜ¸ì EUC (AT&T) ¤ò²¾Äê¤¹¤ë¡£
 
-        -S  Shift_JIS $B$r2>Dj$9$k!#(B $B$$$o$f$kH>3Q%+%J(B (JIS X 0201 $BJR2>L>(B)
-            $B$b<u$1F~$l$k!#(B
+        -S  Shift_JIS ¤ò²¾Äê¤¹¤ë¡£ ¤¤¤ï¤æ¤ëÈ¾³Ñ¥«¥Ê (JIS X 0201 ÊÒ²¾Ì¾)
+            ¤â¼õ¤±Æþ¤ì¤ë¡£
 
-        -W  UTF-8 $B$r2>Dj$9$k!#(B
+        -W  UTF-8 ¤ò²¾Äê¤¹¤ë¡£
 
-        -W8 UTF-8 $B$r2>Dj$9$k!#(B
+        -W8 UTF-8 ¤ò²¾Äê¤¹¤ë¡£
 
         -W16
-            UTF-16 (Little Endien)$B$r2>Dj$9$k!#(B
+            UTF-16 (Little Endian)¤ò²¾Äê¤¹¤ë¡£
 
         -W16B
-            UTF-16 (Big Endien)$B$r2>Dj$9$k!#(B
+            UTF-16 (Big Endian)¤ò²¾Äê¤¹¤ë¡£
 
         -W16L
-            UTF-16 (Little Endien)$B$r2>Dj$9$k!#(B
+            UTF-16 (Little Endian)¤ò²¾Äê¤¹¤ë¡£
 
-    -x  $BDL>o$*$3$J$o$l$k!"$$$o$f$kH>3Q%+%J(B (JIS X 0201 $BJR2>L>(B)
-        $B$+$i$$$o$f$kA43Q%+%J(B (JIS X 0208 $BJR2>L>(B)
-        $B$X$NJQ49$r9T$o$:!"H>3Q%+%J$rJ]B8$9$k!#(B $BF~NO$O!"(BShift_JIS $B$N(B 1byte
-        $B%+%J!"(BSO/SI$B!"(BESC-(-I, SSO $B$r<u$1IU$1$k!#(B $B=PNO$O!"F|K\8l(B EUC $BCf$G$O(B
-        SSO$B!"(BJIS $B%3!<%ICf$G$O(B ESC-(-I $B$r%G%U%)%k%H$GMQ$$$k!#(B
+    -x  ÄÌ¾ï¤ª¤³¤Ê¤ï¤ì¤ë¡¢¤¤¤ï¤æ¤ëÈ¾³Ñ¥«¥Ê (JIS X 0201 ÊÒ²¾Ì¾)
+        ¤«¤é¤¤¤ï¤æ¤ëÁ´³Ñ¥«¥Ê (JIS X 0208 ÊÒ²¾Ì¾)
+        ¤Ø¤ÎÊÑ´¹¤ò¹Ô¤ï¤º¡¢È¾³Ñ¥«¥Ê¤òÊÝÂ¸¤¹¤ë¡£ ÆþÎÏ¤Ï¡¢Shift_JIS ¤Î 1byte
+        ¥«¥Ê¡¢SO/SI¡¢ESC-(-I, SSO ¤ò¼õ¤±ÉÕ¤±¤ë¡£ ½ÐÎÏ¤Ï¡¢ÆüËÜ¸ì EUC Ãæ¤Ç¤Ï
+        SSO¡¢JIS ¥³¡¼¥ÉÃæ¤Ç¤Ï ESC-(-I ¤ò¥Ç¥Õ¥©¥ë¥È¤ÇÍÑ¤¤¤ë¡£
 
-    -X  $B$$$o$f$kH>3Q%+%J(B (JIS X 0201 $BJR2>L>(B) $B$r(B $B$$$o$f$kA43Q%+%J(B (JIS X 0208
-        $BJR2>L>(B) $B$X$HJQ49$9$k!#(B
+    -X  ¤¤¤ï¤æ¤ëÈ¾³Ñ¥«¥Ê (JIS X 0201 ÊÒ²¾Ì¾) ¤ò ¤¤¤ï¤æ¤ëÁ´³Ñ¥«¥Ê (JIS X 0208
+        ÊÒ²¾Ì¾) ¤Ø¤ÈÊÑ´¹¤¹¤ë¡£
 
-    -B  $B2u$l$?(B (Broken) JIS $B%3!<%I!#(B ESC $B$,$J$/$J$C$?$H2>Dj$9$k!#(B
+    -B  ²õ¤ì¤¿ (Broken) JIS ¥³¡¼¥É¡£ ESC ¤¬¤Ê¤¯¤Ê¤Ã¤¿¤È²¾Äê¤¹¤ë¡£
 
-        -B1 ESC-(, ESC-$ $B$N$"$H$N%3!<%I$rLd$o$J$$(B
+        -B1 ESC-(, ESC-$ ¤Î¤¢¤È¤Î¥³¡¼¥É¤òÌä¤ï¤Ê¤¤
 
-        -B2 $B2~9T$N$"$H$K6/@)E*$K(B ASCII $B$KLa$9(B
+        -B2 ²þ¹Ô¤Î¤¢¤È¤Ë¶¯À©Åª¤Ë ASCII ¤ËÌá¤¹
 
     -f[*m*[-*n*]]
-        $B0l9T(B *m* $BJ8;z$K$J$k$h$&$K!"%^!<%8%s$r(B *n*
-        $B$H$7$F4JC1$J@07A$r$*$3$J$&!#(B $B%G%U%)%k%H$OJ8;z?t$O(B 60$B!"%^!<%8%s$O(B 10
-        $B$G$"$k!#(B
+        °ì¹Ô *m* Ê¸»ú¤Ë¤Ê¤ë¤è¤¦¤Ë¡¢¥Þ¡¼¥¸¥ó¤ò *n*
+        ¤È¤·¤Æ´ÊÃ±¤ÊÀ°·Á¤ò¤ª¤³¤Ê¤¦¡£ ¥Ç¥Õ¥©¥ë¥È¤ÏÊ¸»ú¿ô¤Ï 60¡¢¥Þ¡¼¥¸¥ó¤Ï 10
+        ¤Ç¤¢¤ë¡£
 
     -Z[0-3]
-        JIS X 0208 $B1Q?t;z$H<c43$N5-9f$r(B ASCII $B$KJQ49$9$k!#(B
-        $B$D$^$j!"A43Q$rH>3Q$KJQ49$9$k!#(B
+        JIS X 0208 ±Ñ¿ô»ú¤È¼ã´³¤Îµ­¹æ¤ò ASCII ¤ËÊÑ´¹¤¹¤ë¡£
+        ¤Ä¤Þ¤ê¡¢Á´³Ñ¤òÈ¾³Ñ¤ËÊÑ´¹¤¹¤ë¡£
 
         -Z -Z0
             Convert X0208 alphabet to ASCII.
 
-        -Z1 JIS X 0208 $BOB;z4V3V$r(B ASCII space $B0l$D$KJQ49$9$k!#(B
+        -Z1 JIS X 0208 ÏÂ»ú´Ö³Ö¤ò ASCII space °ì¤Ä¤ËÊÑ´¹¤¹¤ë¡£
 
-        -Z2 JIS X 0208 $BOB;z4V3V$r(B ASCII space $BFs$D$KJQ49$9$k!#(B
+        -Z2 JIS X 0208 ÏÂ»ú´Ö³Ö¤ò ASCII space Æó¤Ä¤ËÊÑ´¹¤¹¤ë¡£
 
-        -Z3 $B!d!"!c!"!I!"!u!"$r(B &gt;$B!"(B&lt;$B!"(B&quot;$B!"(B&amp; $B$KJQ49$9$k!#(B
+        -Z3 ¡ä¡¢¡ã¡¢¡É¡¢¡õ¡¢¤ò &gt;¡¢&lt;¡¢&quot;¡¢&amp; ¤ËÊÑ´¹¤¹¤ë¡£
 
-    -b  $B%P%C%U%!%j%s%0=PNO$r9T$&!#(B($B%G%U%)%k%H(B)
+    -b  ¥Ð¥Ã¥Õ¥¡¥ê¥ó¥°½ÐÎÏ¤ò¹Ô¤¦¡£(¥Ç¥Õ¥©¥ë¥È)
 
-    -u  $B=PNO;~$K!"%P%C%U%!%j%s%0$7$J$$!#(B ssh localhost | nkf -u
-        $B$H$$$&$h$&$K;H$&!#(B
+    -u  ½ÐÎÏ»þ¤Ë¡¢¥Ð¥Ã¥Õ¥¡¥ê¥ó¥°¤·¤Ê¤¤¡£ ssh localhost | nkf -u
+        ¤È¤¤¤¦¤è¤¦¤Ë»È¤¦¡£
 
-    -t  $B2?$b$7$J$$!#(B
+    -t  ²¿¤â¤·¤Ê¤¤¡£
 
-    -I  ISO-2022-JP $B0J30$N4A;z%3!<%I$r".$KJQ49!#(B
+    -I  ISO-2022-JP °Ê³°¤Î´Á»ú¥³¡¼¥É¤ò¢®¤ËÊÑ´¹¡£
 
     -i[@B]
-        JIS $B4A;z$r;X<($9$k%7!<%1%s%9$r;XDj$9$k!#(B ($B%G%U%)%k%H$O!"(BESC-$-B)
+        JIS ´Á»ú¤ò»Ø¼¨¤¹¤ë¥·¡¼¥±¥ó¥¹¤ò»ØÄê¤¹¤ë¡£
+
+        -i@ JIS X 0208-1978 ¤òÍÑ¤¤¤ë¡£
+
+        -iB JIS X 0208-1983/1990 ¤òÍÑ¤¤¤ë¡£
 
     -o[BJH]
-        1 $B%P%$%H1Q?tJ8;z%;%C%H$r;X<($9$k%7!<%1%s%9$r;XDj$9$k!#(B
-        ($B%G%U%)%k%H$O!"(BESC-(-B)
+        1 ¥Ð¥¤¥È±Ñ¿ôÊ¸»ú¥»¥Ã¥È¤ò»Ø¼¨¤¹¤ë¥·¡¼¥±¥ó¥¹¤ò»ØÄê¤¹¤ë¡£
 
-    -r  ROT13/47 $B$NJQ49$r$9$k!#(B
+        -oB 1 ¥Ð¥¤¥È±Ñ¿ôÊ¸»ú¥»¥Ã¥È¤È¤·¤Æ US-ASCII ¤òÍÑ¤¤¤ë¡£
 
-    -g  $B<+F0H=JL$N7k2L$r=PNO$7$^$9!#(B
+        -oJ 1 ¥Ð¥¤¥È±Ñ¿ôÊ¸»ú¥»¥Ã¥È¤È¤·¤Æ JIS X 0201 Roman ¤òÍÑ¤¤¤ë¡£
 
-    -v  $B%P!<%8%g%s$rI=<($9$k!#(B
+        -oH ESC ( H ¤Ï½é´ü¤Î JUNET
+            ¥³¡¼¥É¤Ç¤Î¤ßÍÑ¤¤¤é¤ì¤¿¤â¤Î¤Ç¡¢¸½ºß¤Ï»È¤Ã¤Æ¤Ï¤Ê¤é¤Ê¤¤¡£
 
-    -T  $B%F%-%9%H%b!<%I$G=PNO$9$k!#(B(MS-DOS $B>e$G$N$_8zNO$r;}$D(B)
+    -r  ROT13/47 ¤ÎÊÑ´¹¤ò¤¹¤ë¡£
 
-    -l  0x80-0xfe $B$N%3!<%I$r(B ISO-8859-1 (Latin-1) $B$H$7$F07$&!#(B JIS
-        $B%3!<%I%"%&%H%W%C%H$H$NAH9g$;$_$N$_M-8z!#(B -s, -e, -x $B$H$ON>N)$7$J$$!#(B
+    -g  ¼«Æ°È½ÊÌ¤Î·ë²Ì¤ò½ÐÎÏ¤·¤Þ¤¹¡£
 
-    -O  $B%U%!%$%k$K=PNO$9$k!#(B UNIX $B$G$OITMW$J5!G=$@$,(B Windows $B$d(B MSDOS
-        $B$G$OI,MW$i$7$$!#(B
-        $BD>8e$N0z$-?t$G$J$/!":G8e$N%U%!%$%kL>$,=PNO%U%!%$%kL>$H$J$j>e=q$-$5$l(B
-        $B$F$7$^$&$N$GCm0U!#(B $B%U%!%$%kL>$,$J$$>l9g$O(B nkf.out$B!#(B
+    -T  ¥Æ¥­¥¹¥È¥â¡¼¥É¤Ç½ÐÎÏ¤¹¤ë¡£(MS-DOS ¾å¤Ç¤Î¤ß¸úÎÏ¤ò»ý¤Ä)
+
+    -l  0x80-0xfe ¤Î¥³¡¼¥É¤ò ISO-8859-1 (Latin-1) ¤È¤·¤Æ°·¤¦¡£ JIS
+        ¥³¡¼¥É¥¢¥¦¥È¥×¥Ã¥È¤È¤ÎÁÈ¹ç¤»¤ß¤Î¤ßÍ­¸ú¡£ -s, -e, -x ¤È¤ÏÎ¾Î©¤·¤Ê¤¤¡£
+
+    -O  ¥Õ¥¡¥¤¥ë¤Ë½ÐÎÏ¤¹¤ë¡£ UNIX ¤Ç¤ÏÉÔÍ×¤Êµ¡Ç½¤À¤¬ Windows ¤ä MSDOS
+        ¤Ç¤ÏÉ¬Í×¤é¤·¤¤¡£
+        Ä¾¸å¤Î°ú¤­¿ô¤Ç¤Ê¤¯¡¢ºÇ¸å¤Î¥Õ¥¡¥¤¥ëÌ¾¤¬½ÐÎÏ¥Õ¥¡¥¤¥ëÌ¾¤È¤Ê¤ê¾å½ñ¤­¤µ¤ì
+        ¤Æ¤·¤Þ¤¦¤Î¤ÇÃí°Õ¡£ ¥Õ¥¡¥¤¥ëÌ¾¤¬¤Ê¤¤¾ì¹ç¤Ï nkf.out¡£
 
     -L[uwm] -d -c
-        $B2~9T%3!<%I$rJQ49$9$k!#(B
+        ²þ¹Ô¥³¡¼¥É¤òÊÑ´¹¤¹¤ë¡£
 
         -Lu -d
             unix (LF)
@@ -179,175 +187,186 @@ OPTIONS
 
         -Lm mac (CR)
 
-        $B%G%U%)%k%H$G$OJQ49$7$J$$!#(B
+        ¥Ç¥Õ¥©¥ë¥È¤Ç¤ÏÊÑ´¹¤·¤Ê¤¤¡£
 
     --ic=<input_codeset --oc=<output_codeset>>
-        $BF~NO!&=PNO$N4A;z%3!<%I7O$r;XDj$7$^$9!#(B
+        ÆþÎÏ¡¦½ÐÎÏ¤Î´Á»ú¥³¡¼¥É·Ï¤ò»ØÄê¤·¤Þ¤¹¡£
 
         ISO-2022-JP
-            $B$$$o$f$k(B JIS $B%3!<%I!#(B-j, -J $B$HF1$8!#(B
+            ¤¤¤ï¤æ¤ë JIS ¥³¡¼¥É¡£-j, -J ¤ÈÆ±¤¸¡£
 
         ISO-2022-JP-1
-            RFC 2237 $B$KDj$a$i$l$?7A<0!#(B JIS X 0212 $B$r4^$`!#(B
+            RFC 2237 ¤ËÄê¤á¤é¤ì¤¿·Á¼°¡£ JIS X 0212 ¤ò´Þ¤à¡£
 
         ISO-2022-JP-3
-            RFC 2237 $B$KDj$a$i$l$?7A<0!#(B JIS X 0213 $B$r4^$`!#(B
+            RFC 2237 ¤ËÄê¤á¤é¤ì¤¿·Á¼°¡£ JIS X 0213 ¤ò´Þ¤à¡£
 
         EUC-JP
-            EUC $B%3!<%I!#(B-e, -E $B$HF1$8!#(B
+            EUC ¥³¡¼¥É¡£-e, -E ¤ÈÆ±¤¸¡£
 
         EUC-JISX0213
-            $BJ8;z=89g$K(B JIS X 0213:2000 $B$rMQ$$$?(B EUC-JP$B!#(B
+            Ê¸»ú½¸¹ç¤Ë JIS X 0213:2000 ¤òÍÑ¤¤¤¿ EUC-JP¡£
 
         EUC-JIS-2004
-            $BJ8;z=89g$K(B JIS X 0213:2004 $B$rMQ$$$?(B EUC-JP$B!#(B
+            Ê¸»ú½¸¹ç¤Ë JIS X 0213:2004 ¤òÍÑ¤¤¤¿ EUC-JP¡£
 
         eucJP-ascii
-            $B%*!<%W%s%0%k!<%WF|K\%Y%s%@6(5D2q$,Dj5A$7$?(B eucJP-ascii$B!#(B -x
-            $B$,0EL[$N$&$A$K;XDj$5$l$k!#(B
+            ¥ª¡¼¥×¥ó¥°¥ë¡¼¥×ÆüËÜ¥Ù¥ó¥À¶¨µÄ²ñ¤¬ÄêµÁ¤·¤¿ eucJP-ascii¡£ -x
+            ¤¬°ÅÌÛ¤Î¤¦¤Á¤Ë»ØÄê¤µ¤ì¤ë¡£
 
         eucJP-ms
-            $B%*!<%W%s%0%k!<%WF|K\%Y%s%@6(5D2q$,Dj5A$7$?(B euc-JPms$B!#(B -x
-            $B$,0EL[$N$&$A$K;XDj$5$l$k!#(B
+            ¥ª¡¼¥×¥ó¥°¥ë¡¼¥×ÆüËÜ¥Ù¥ó¥À¶¨µÄ²ñ¤¬ÄêµÁ¤·¤¿ euc-JPms¡£ -x
+            ¤¬°ÅÌÛ¤Î¤¦¤Á¤Ë»ØÄê¤µ¤ì¤ë¡£
 
         CP51932
-            Micorosft Code Page 51932$B!#(B -x $B$,0EL[$N$&$A$K;XDj$5$l$k!#(B
+            Micorosft Code Page 51932¡£ -x ¤¬°ÅÌÛ¤Î¤¦¤Á¤Ë»ØÄê¤µ¤ì¤ë¡£
 
         Shift_JIS
-            Shift_JIS$B!#(B -s, -S $B$HF1$8!#(B
+            Shift_JIS¡£ -s, -S ¤ÈÆ±¤¸¡£
 
         Shift_JISX0213
-            $BJ8;z=89g$K(B JIS X 0213:2000 $B$rMQ$$$?(B Shift_JIS$B!#(B
+            Ê¸»ú½¸¹ç¤Ë JIS X 0213:2000 ¤òÍÑ¤¤¤¿ Shift_JIS¡£
 
         Shift_JIS-2004
-            $BJ8;z=89g$K(B JIS X 0213:2004 $B$rMQ$$$?(B Shift_JIS$B!#(B
+            Ê¸»ú½¸¹ç¤Ë JIS X 0213:2004 ¤òÍÑ¤¤¤¿ Shift_JIS¡£
 
         CP932
-            Micorosft Code Page 932$B!#(B -x $B$,0EL[$N$&$A$K;XDj$5$l$k!#(B
+            Micorosft Code Page 932¡£ -x ¤¬°ÅÌÛ¤Î¤¦¤Á¤Ë»ØÄê¤µ¤ì¤ë¡£
 
         UTF-8 UTF-8N
-            BOM $BL5$7$N(B UTF-8$B!#(B -w, -W $B$HF1$8!#(B
+            BOM Ìµ¤·¤Î UTF-8¡£ -w, -W ¤ÈÆ±¤¸¡£
 
         UTF-8-BOM
-            BOM $BIU$-$N(B UTF-8$B!#(B-w8 $B$^$?$O(B -W $B$HF1$8!#(B
+            BOM ÉÕ¤­¤Î UTF-8¡£-w8 ¤Þ¤¿¤Ï -W ¤ÈÆ±¤¸¡£
 
         UTF8-MAC
-            UTF8-MAC$B!#8_49J,2r$5$l$?$R$i$,$J!&%+%?%+%JEy$r7k9g$7$^$9!#(B
+            UTF8-MAC¡£¸ß´¹Ê¬²ò¤µ¤ì¤¿¤Ò¤é¤¬¤Ê¡¦¥«¥¿¥«¥ÊÅù¤ò·ë¹ç¤·¤Þ¤¹¡£
+            ÆþÎÏ¤Î¤ß¤ÎÂÐ±þ¤Ç¤¹¡£
 
         UTF-16 UTF-16BE-BOM
-            BOM $BM-$j$G(B Big Endian $B$N(B UTF-16$B!#(B -w16B, -W16B $B$HF1$8!#(B
+            BOM Í­¤ê¤Ç Big Endian ¤Î UTF-16¡£ -w16B, -W16B ¤ÈÆ±¤¸¡£
 
         UTF-16BE
-            BOM $BL5$7$G(B Big Endian $B$N(B UTF-16$B!#(B -w16B0. -W16B $B$HF1$8!#(B
+            BOM Ìµ¤·¤Ç Big Endian ¤Î UTF-16¡£ -w16B0. -W16B ¤ÈÆ±¤¸¡£
 
         UTF-16LE-BOM
-            BOM $BM-$j$G(B Little Endian $B$N(B UTF-16$B!#(B -w16L, -W16L $B$HF1$8!#(B
+            BOM Í­¤ê¤Ç Little Endian ¤Î UTF-16¡£ -w16L, -W16L ¤ÈÆ±¤¸¡£
 
         UTF-16LE
-            BOM $BL5$7$G(B Little Endian $B$N(B UTF-16$B!#(B -w16L0, -W16L $B$HF1$8!#(B
+            BOM Ìµ¤·¤Ç Little Endian ¤Î UTF-16¡£ -w16L0, -W16L ¤ÈÆ±¤¸¡£
 
     --fj --unix --mac --msdos --windows
-        $B$3$l$i$N%7%9%F%`$KE,$7$?JQ49$r$7$^$9!#(B
+        ¤³¤ì¤é¤Î¥·¥¹¥Æ¥à¤ËÅ¬¤·¤¿ÊÑ´¹¤ò¤·¤Þ¤¹¡£
 
     --jis --euc --sjis --mime --base64
-        $BBP1~$9$kJQ49$r$7$^$9!#(B
+        ÂÐ±þ¤¹¤ëÊÑ´¹¤ò¤·¤Þ¤¹¡£
 
-    --hirakana --katakana
-        $BJ?2>L>!"JR2>L>JQ49(B
+    --hiragana --katakana
+        Ê¿²¾Ì¾¡¢ÊÒ²¾Ì¾ÊÑ´¹
 
     --fb-{skip, html, xml, perl, java, subchar}
-        Unicode $B$+$i(B Shift_JIS, EUC-JP, ISO-2022-JP
-        $B$KJQ49$9$k:]$K!"JQ49$G$-$J$+$C$?J8;z$r$I$&07$&$+$r;XDj$G$-$^$9!#(B
+        Unicode ¤«¤é Shift_JIS, EUC-JP, ISO-2022-JP
+        ¤ËÊÑ´¹¤¹¤ëºÝ¤Ë¡¢ÊÑ´¹¤Ç¤­¤Ê¤«¤Ã¤¿Ê¸»ú¤ò¤É¤¦°·¤¦¤«¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
 
     --prefix=*escape character**target character*..
-        EUC-JP $B$+$i(B Shift_JIS $B$X$NJQ49$N:]!"(B2 $B%P%$%HL\(B
-        $B$K8=$l$?J8;z$NA0$K%(%9%1!<%WJ8;z$r$D$1$k$3$H$,$G$-$^$9!#(B $B0z?t$N(B 1
-        $BJ8;zL\$,%(%9%1!<%WJ8;z!"(B2
-        $BJ8;zL\0J9_$K%(%9%1!<%W$5$l$k$Y$-J8;z$r;XDj$7$^$9!#(B
+        EUC-JP ¤«¤é Shift_JIS ¤Ø¤ÎÊÑ´¹¤ÎºÝ¡¢2 ¥Ð¥¤¥ÈÌÜ
+        ¤Ë¸½¤ì¤¿Ê¸»ú¤ÎÁ°¤Ë¥¨¥¹¥±¡¼¥×Ê¸»ú¤ò¤Ä¤±¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£ °ú¿ô¤Î 1
+        Ê¸»úÌÜ¤¬¥¨¥¹¥±¡¼¥×Ê¸»ú¡¢2
+        Ê¸»úÌÜ°Ê¹ß¤Ë¥¨¥¹¥±¡¼¥×¤µ¤ì¤ë¤Ù¤­Ê¸»ú¤ò»ØÄê¤·¤Þ¤¹¡£
 
-        $BNc$($P!"(B
+        Îã¤¨¤Ð¡¢
 
-        --prefix=\$@ $B$H$9$k$H!"(BShift_JIS $B$N(B 2 $BJ8;zL\$K(B $ $B$+(B @
-        $B$,Mh$?$i!"$=$NA0$K(B \ $B$,A^F~$5$l$^$9(B --prefix=@@ $B$H$9$k$H!"(BShift_JIS
-        $B$N(B 2 $BJ8;zL\$K(B @ $B$,Mh$?$i!"$=$NA0$K(B @ $B$,A^F~$5$l$^$9(B
+        --prefix=\$@ ¤È¤¹¤ë¤È¡¢Shift_JIS ¤Î 2 Ê¸»úÌÜ¤Ë $ ¤« @
+        ¤¬Íè¤¿¤é¡¢¤½¤ÎÁ°¤Ë \ ¤¬ÁÞÆþ¤µ¤ì¤Þ¤¹ --prefix=@@ ¤È¤¹¤ë¤È¡¢Shift_JIS
+        ¤Î 2 Ê¸»úÌÜ¤Ë @ ¤¬Íè¤¿¤é¡¢¤½¤ÎÁ°¤Ë @ ¤¬ÁÞÆþ¤µ¤ì¤Þ¤¹
 
     --no-cp932ext
-        CP932 $B$K$*$$$F3HD%$5$l$?!"(BNEC $BFC<lJ8;z!"(BNEC $BA*Dj(B IBM $B3HD%J8;z(B (89-92
-        $B6h(B)$B!"(BIBM $B3HD%J8;z$rJQ49$7$^$;$s!#(B
+        CP932 ¤Ë¤ª¤¤¤Æ³ÈÄ¥¤µ¤ì¤¿¡¢NEC ÆÃ¼ìÊ¸»ú¡¢NEC ÁªÄê IBM ³ÈÄ¥Ê¸»ú (89-92
+        ¶è)¡¢IBM ³ÈÄ¥Ê¸»ú¤òÊÑ´¹¤·¤Þ¤»¤ó¡£
 
     --no-best-fit-chars
         Unicode
-        $B$+$i$NJQ49$N:]$K!"1}I|0BA4@-$,3NJ]$5$l$J$$J8;z$NJQ49$r9T$$$^$;$s!#(B
-        Unicode $B$+$i(B Unicode $B$NJQ49$N:]$K(B -x $B$H6&$K;XDj$9$k$H!"(Bnkf $B$r(B UTF
-        $B7A<0$NJQ49$KMQ$$$k$3$H$,$G$-$^$9!#(B
-        ($B5U$K8@$($P!"$3$l$r;XDj$7$J$$$H0lIt$NJ8;z$,J]B8$5$l$^$;$s(B)
+        ¤«¤é¤ÎÊÑ´¹¤ÎºÝ¤Ë¡¢±ýÉü°ÂÁ´À­¤¬³ÎÊÝ¤µ¤ì¤Ê¤¤Ê¸»ú¤ÎÊÑ´¹¤ò¹Ô¤¤¤Þ¤»¤ó¡£
+        Unicode ¤«¤é Unicode ¤ÎÊÑ´¹¤ÎºÝ¤Ë -x ¤È¶¦¤Ë»ØÄê¤¹¤ë¤È¡¢nkf ¤ò UTF
+        ·Á¼°¤ÎÊÑ´¹¤ËÍÑ¤¤¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+        (µÕ¤Ë¸À¤¨¤Ð¡¢¤³¤ì¤ò»ØÄê¤·¤Ê¤¤¤È°ìÉô¤ÎÊ¸»ú¤¬ÊÝÂ¸¤µ¤ì¤Þ¤»¤ó)
 
-        $B%Q%9$K4X$o$kJ8;zNs$rJQ49$9$k:]$K$O!"$3$N%*%W%7%g%s$r;XDj$9$k$3$H$r6/(B
-        $B$/?d>)$7$^$9!#(B
+        ¥Ñ¥¹¤Ë´Ø¤ï¤ëÊ¸»úÎó¤òÊÑ´¹¤¹¤ëºÝ¤Ë¤Ï¡¢¤³¤Î¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤¹¤ë¤³¤È¤ò¶¯
+        ¤¯¿ä¾©¤·¤Þ¤¹¡£
 
     --cap-input, --url-input
-        $B$=$l$>$l(B :$B!"(B% $B$KB3$/(B 16 $B?J?t$rJ8;z$KJQ49$9$k(B
+        ¤½¤ì¤¾¤ì :¡¢% ¤ËÂ³¤¯ 16 ¿Ê¿ô¤òÊ¸»ú¤ËÊÑ´¹¤¹¤ë
 
     --numchar-input
-        &#....; $B$N$h$&$J(B Unicode $BJ8;z;2>H$rJQ49$9$k(B
+        &#....; ¤Î¤è¤¦¤Ê Unicode Ê¸»ú»²¾È¤òÊÑ´¹¤¹¤ë
 
     --in-place[=*SUFFIX*] --overwrite[=*SUFFIX*]
-    $B85$N%U%!%$%k$rJQ497k2L$GCV$-49$($k!#(B
-    $BJ#?t$N%U%!%$%k$r=q$-49$($k$3$H$b2DG=!#(B
-    $B85$N%U%!%$%k$N%?%$%`%9%?%s%W$H%Q!<%_%C%7%g%s$,J];}$5$l$k!#(B
-    $B8=:_!":n@.F|;~$d(B inode
-    $B$OJQ99$5$l$k$,!">-Mh$K$o$?$C$F$3$N<BAu$N$^$^$G$"$kJ]>Z$OL5$$!#(B
+        ¸µ¤Î¥Õ¥¡¥¤¥ë¤òÊÑ´¹·ë²Ì¤ÇÃÖ¤­´¹¤¨¤ë¡£
+        Ê£¿ô¤Î¥Õ¥¡¥¤¥ë¤ò½ñ¤­´¹¤¨¤ë¤³¤È¤â²ÄÇ½¡£
+        ¸µ¤Î¥Õ¥¡¥¤¥ë¤Î¥¿¥¤¥à¥¹¥¿¥ó¥×¤È¥Ñ¡¼¥ß¥Ã¥·¥ç¥ó¤¬ÊÝ»ý¤µ¤ì¤ë¡£
+        ¸½ºß¡¢ºîÀ®Æü»þ¤ä inode
+        ¤ÏÊÑ¹¹¤µ¤ì¤ë¤¬¡¢¾­Íè¤Ë¤ï¤¿¤Ã¤Æ¤³¤Î¼ÂÁõ¤Î¤Þ¤Þ¤Ç¤¢¤ëÊÝ¾Ú¤ÏÌµ¤¤¡£
+
     --guess
-        $B<+F0H=JL$N7k2L$r=PNO$9$k(B
+        ¼«Æ°È½ÊÌ¤Î·ë²Ì¤ò½ÐÎÏ¤¹¤ë
 
     --help
-        $B%3%^%s%I$N4JC1$J@bL@$rI=<($9$k!#(B
+        ¥³¥Þ¥ó¥É¤Î´ÊÃ±¤ÊÀâÌÀ¤òÉ½¼¨¤¹¤ë¡£
 
-    --version
-        nkf $B$N%P!<%8%g%s$rI=<($9$k!#(B
+    -V  nkf ¤ÎÀßÄê¤òÉ½¼¨¤¹¤ë¡£
 
-    --  $B$3$l0J9_$N%*%W%7%g%s$rL5;k$9$k(B
+    -v --version
+        nkf ¤Î¥Ð¡¼¥¸¥ç¥ó¤òÉ½¼¨¤¹¤ë¡£
 
-    --exec-in nkf [options] --exec-in cmd args... $B$H$d$k$H!"(Bcmd $B$N=PNO$r(B nkf
-    $B$NF~NO$H$9$k(B (config.h $B$G(B EXEC_IO $B$r(B define
-    $B$7$F%3%s%Q%$%k$7$?;~$N$_M-8z(B)
+    --  ¤³¤ì°Ê¹ß¤Î¥ª¥×¥·¥ç¥ó¤òÌµ»ë¤¹¤ë
+
+    --exec-in
+        nkf [options] --exec-in cmd args... ¤È¤ä¤ë¤È¡¢cmd ¤Î½ÐÎÏ¤ò nkf
+        ¤ÎÆþÎÏ¤È¤¹¤ë (config.h ¤Ç EXEC_IO ¤ò define
+        ¤·¤Æ¥³¥ó¥Ñ¥¤¥ë¤·¤¿»þ¤Î¤ßÍ­¸ú)
+
     --exec-out
-        nkf [options] --exec-out cmd args... $B$H$d$k$H!"(Bnkf $B$N=PNO$r(B cmd
-        $B$NF~NO$H$9$k(B (config.h $B$G(B EXEC_IO $B$r(B define
-        $B$7$F%3%s%Q%$%k$7$?;~$N$_M-8z(B)
+        nkf [options] --exec-out cmd args... ¤È¤ä¤ë¤È¡¢nkf ¤Î½ÐÎÏ¤ò cmd
+        ¤ÎÆþÎÏ¤È¤¹¤ë (config.h ¤Ç EXEC_IO ¤ò define
+        ¤·¤Æ¥³¥ó¥Ñ¥¤¥ë¤·¤¿»þ¤Î¤ßÍ­¸ú)
 
 BUGS
-    $B<B$O!"F~NO$N%3!<%I7O$NH=Dj$O!"(BShift_JIS $B$H(B EUC
-    $B$H$N<+F0H=Dj$G$"$j!":G=i$KFCDj$G$-$kJ8;z$,Mh$?;~E@$G3NDj$7$F$7$^$&!#(B
-    $B$=$7$F!"FCDjITG=$N4V$OJ]N1%P%C%U%!$K$?$a$F$*$+$l!"3NDj8e$K=hM}$5$l$k!#(B
-    $B$3$N$?$a!"(B7 $B%S%C%H(B JIS $B$O>o$KG'<1$5$l$k!#(B Shift_JIS$B!"(BEUC
-    $B:.9g$b$[$H$s$I$N>l9g$OLdBj$,$J$$!#(B $B$?$@$7!"(BShift_JIS $B$N$$$o$f$kH>3Q%+%J(B
-    (JIS X 0201 $BJR2>L>(B) $B$H(B EUC $B4A;z$,<1JL$G$-$J$$!#(B
-    $B$7$?$,$C$F!"%G%U%)%k%H$G$O(B Shift_JIS
-    $B$N$$$o$f$kH>3Q%+%J$O$J$$$H2>Dj$7$F$$$k!#(B ($B$D$^$j!"(BShift_JIS $B$+(B EUC
-    $B$+LB$C$?;~$O(B EUC $B$H$_$J$9(B)
+    ¼Â¤Ï¡¢ÆþÎÏ¤Î¥³¡¼¥É·Ï¤ÎÈ½Äê¤Ï¡¢Shift_JIS ¤È EUC
+    ¤È¤Î¼«Æ°È½Äê¤Ç¤¢¤ê¡¢ºÇ½é¤ËÆÃÄê¤Ç¤­¤ëÊ¸»ú¤¬Íè¤¿»þÅÀ¤Ç³ÎÄê¤·¤Æ¤·¤Þ¤¦¡£
+    ¤½¤·¤Æ¡¢ÆÃÄêÉÔÇ½¤Î´Ö¤ÏÊÝÎ±¥Ð¥Ã¥Õ¥¡¤Ë¤¿¤á¤Æ¤ª¤«¤ì¡¢³ÎÄê¸å¤Ë½èÍý¤µ¤ì¤ë¡£
+    ¤³¤Î¤¿¤á¡¢7 ¥Ó¥Ã¥È JIS ¤Ï¾ï¤ËÇ§¼±¤µ¤ì¤ë¡£ Shift_JIS¡¢EUC
+    º®¹ç¤â¤Û¤È¤ó¤É¤Î¾ì¹ç¤ÏÌäÂê¤¬¤Ê¤¤¡£ ¤¿¤À¤·¡¢Shift_JIS ¤Î¤¤¤ï¤æ¤ëÈ¾³Ñ¥«¥Ê
+    (JIS X 0201 ÊÒ²¾Ì¾) ¤È EUC ´Á»ú¤¬¼±ÊÌ¤Ç¤­¤Ê¤¤¡£
+    ¤·¤¿¤¬¤Ã¤Æ¡¢¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï Shift_JIS
+    ¤Î¤¤¤ï¤æ¤ëÈ¾³Ñ¥«¥Ê¤Ï¤Ê¤¤¤È²¾Äê¤·¤Æ¤¤¤ë¡£ (¤Ä¤Þ¤ê¡¢Shift_JIS ¤« EUC
+    ¤«ÌÂ¤Ã¤¿»þ¤Ï EUC ¤È¤ß¤Ê¤¹)
 
     Unicode
-    $B$NF|K\8l0J30$NItJ,$NJQ49$K$OBP1~$7$F$$$J$$$,!"(B--no-best-fit-chars
-    $B$r;XDj$9$l$P!"(BUTF-8 $B$H(B UTF-16 $B$NAj8_JQ49$r$9$k$3$H$O2DG=$G$"$k!#(B
+    ¤ÎÆüËÜ¸ì°Ê³°¤ÎÉôÊ¬¤ÎÊÑ´¹¤Ë¤ÏÂÐ±þ¤·¤Æ¤¤¤Ê¤¤¤¬¡¢--no-best-fit-chars
+    ¤ò»ØÄê¤¹¤ì¤Ð¡¢UTF-8 ¤È UTF-16 ¤ÎÁê¸ßÊÑ´¹¤ò¤¹¤ë¤³¤È¤Ï²ÄÇ½¤Ç¤¢¤ë¡£
 
 ACKNOWLEDGE
-    $B0J2<$N$+$?$,$?!"$I$&$b$"$j$,$H$&$4$6$$$^$7$?!#(B
+    °Ê²¼¤Î¤«¤¿¤¬¤¿¡¢¤É¤¦¤â¤¢¤ê¤¬¤È¤¦¤´¤¶¤¤¤Þ¤·¤¿¡£
 
   nkf 1.4
     morb@fujitsu, kiss@ayumi.stars.flab.fujitsu, cen122@flab.fujitsu,
-    yuki@flab.fujitsu $BB>!"(Bfujitsu & flab.fujitsu $B$N3'$5$s$N6(NO$K46<U!#(B
+    yuki@flab.fujitsu Â¾¡¢fujitsu & flab.fujitsu ¤Î³§¤µ¤ó¤Î¶¨ÎÏ¤Ë´¶¼Õ¡£
     shinoda@cs.titech, kato@cs.titech, uematsu@cs.titech TNX
-    kono@ie.u-ryukyu.ac.jp
+    kono@ie.u-ryukyu.ac.jp void@merope.pleiades.or.jp (Kusakabe Youichi)
+    NIDE Naoyuki <nide@ics.nara-wu.ac.jp> ohta@src.ricoh.co.jp (Junn Ohta)
+    inouet@strl.nhk.or.jp (Tomoyuki Inoue) kiri@pulser.win.or.jp (Tetsuaki
+    Kiriyama) Kimihiko Sato <sato@sail.t.u-tokyo.ac.jp>
+    a_kuroe@kuroe.aoba.yokohama.jp (Akihiko Kuroe) kono@ie.u-ryukyu.ac.jp
+    (Shinji Kono) GHG00637@nifty-serve.or.jp (COW)
 
   nkf 1.9-
-    $B2OLn??<#(B
+    ²ÏÌî¿¿¼£
     Akio Furukawa
     Andy Taki
     From: OHARA Shigeki
     Fumitaka Kitagawa
     Hiroaki Sengoku
-    Ikuhiro MORITA ($B?9ED(B $B0i9((B)
+    Ikuhiro MORITA (¿¹ÅÄ °é¹¨)
     Yoshiharu ITO
     Junn Ohta
     KAWAMURA Masao
@@ -357,8 +376,8 @@ ACKNOWLEDGE
     Ki-ichiro SATO
     Kiwamu Aoyama
     Koichi Hirayama
-    Mitsuru Hase ($BD9C+!!K~(B)
-    OHARA Shigeki ($BBg86(B $B=E<y(B)
+    Mitsuru Hase (Ä¹Ã«¡¡Ëþ)
+    OHARA Shigeki (Âç¸¶ ½Å¼ù)
     Rei FURUKAWA
     Satoru Takabayashi
     Shigeyuki Takagi
@@ -367,67 +386,68 @@ ACKNOWLEDGE
     TOYODA Jiro
     TSUCHIYA Masatoshi
     Tsutomu Sakai
-    YAMASHITA Junji ($B;32<(B $B=c;J(B)
+    YAMASHITA Junji (»³²¼ ½ã»Ê)
     Yasuyuki Sato
     Yoshiaki Yanagihara
     hat@so-net
-    $B#D#C#C5;=QItEOJU(B
-    $B$+$H$Z(B / $B2CF#(B $B5.;J(B
-    $B$+$Y(Bdais
-    $B$R$m$;(B $B$^$5$"$-(B
-    $B%$%s%H%i%M%C%H%7%9%F%`(B($B3t(B)$B>>Hx(B
-    $B1-;tJ8IR(B
-    $B1v:j(B $B5#I'(B(SHIOZAKI Takehiko)
-    $B2OB<2mIW(B (Media Lab.)
-    $B2OLn(B $B9/;J(B
-    $B4n@%!HE_G-!I9@!wFn9q2-Fl(B
-    $B6b0f(B $BCRI'(B
-    $B7KED(B $BM4;K(B ($B$+$D$i$@(B $B$^$5$7(B)
-    $B9b6659LA(B
-    $B9q5H(B
-    $B9u9>L@I'(B
-    $B;0Bp@5BY(B
-    $B;3AR(B $B??(B
-    $B;3K\(B $BK'?M(B
-    $B;3LnM5;J(B ($B$d$^$N$f$&$8(B)
-    $B=EB<K!9n(B
-    $B>.Eg4pLw(B
-    $B>eED!!7r(B
-    $B?70f(B $B9/;J(B (Koji Arai)
-    $B?9!!@i3(;R(B
-    $B?9!!OBI'(B
-    $B?eLn(B $B5.J8(B
-    $BA0COOB=S(B
-    $BCg=!:,!wJBNs?.Mj8&(B
-    $BCvC+(B $B1Q0lO:(B == Eiichiro Itani
-    $BF#86!!=(9T(B
-    $BH,ED(B $B??9T(B (Masayuki Hatta)
-    $BHx@nIRLi(B
-    $BK>7n(B $B9';V(B
-    $BLZB<(B ($B!wC^GHBg3X?t3X8&5f2J(B)
-    $BLnB<=S>4(B
-    $BM-2,!w%_%N%k%?(B
-    $BM-Bt(B $BL@9((B
-    $BMn9g0l4n(B
-    $BNS(B $BN<(B
-    $BT"0B(B $B<#(B
-    $BLZ2<(B $BM:2p(B
-    $BEDCfN4M5(B
-    $BDaC+D><y(B
-    $BCfED?-1Y(B
-    $B$o$?$J$Y$R$m$U$_(B
+    £Ä£Ã£Ãµ»½ÑÉôÅÏÊÕ
+    ¤«¤È¤Ú / ²ÃÆ£ µ®»Ê
+    ¤«¤Ùdais
+    ¤Ò¤í¤» ¤Þ¤µ¤¢¤­
+    ¥¤¥ó¥È¥é¥Í¥Ã¥È¥·¥¹¥Æ¥à(³ô)¾¾Èø
+    ±­»ôÊ¸ÉÒ
+    ±öºê µ£É§(SHIOZAKI Takehiko)
+    ²ÏÂ¼²íÉ× (Media Lab.)
+    ²ÏÌî ¹¯»Ê
+    ´îÀ¥¡ÈÅßÇ­¡É¹À¡÷Æî¹ñ²­Æì
+    ¶â°æ ÃÒÉ§
+    ·ËÅÄ Í´»Ë (¤«¤Ä¤é¤À ¤Þ¤µ¤·)
+    ¹â¶¶µ¹ÌÁ
+    ¹ñµÈ
+    ¹õ¹¾ÌÀÉ§
+    »°ÂðÀµÂÙ
+    »³ÁÒ ¿¿
+    »³ËÜ Ë§¿Í
+    »³ÌîÍµ»Ê (¤ä¤Þ¤Î¤æ¤¦¤¸)
+    ½ÅÂ¼Ë¡¹î
+    ¾®Åç´ðÌ÷
+    ¾åÅÄ¡¡·ò
+    ¿·°æ ¹¯»Ê (Koji Arai)
+    ¿¹¡¡Àé³¨»Ò
+    ¿¹¡¡ÏÂÉ§
+    ¿åÌî µ®Ê¸
+    Á°ÃÏÏÂ½Ó
+    Ãç½¡º¬¡÷ÊÂÎó¿®Íê¸¦
+    ÃöÃ« ±Ñ°ìÏº == Eiichiro Itani
+    Æ£¸¶¡¡½¨¹Ô
+    È¬ÅÄ ¿¿¹Ô (Masayuki Hatta)
+    ÈøÀîÉÒÌé
+    Ë¾·î ¹§»Ö
+    ÌÚÂ¼ (¡÷ÃÞÇÈÂç³Ø¿ô³Ø¸¦µæ²Ê)
+    ÌîÂ¼½Ó¾´
+    Í­²¬¡÷¥ß¥Î¥ë¥¿
+    Í­Âô ÌÀ¹¨
+    Íî¹ç°ì´î
+    ÎÓ Î¼
+    Ô¢°Â ¼£
+    ÌÚ²¼ Íº²ð
+    ÅÄÃæÎ´Íµ
+    ÄáÃ«Ä¾¼ù
+    ÃæÅÄ¿­±Ù
+    ¤ï¤¿¤Ê¤Ù¤Ò¤í¤Õ¤ß
     MoonWolf
     sava
 
 AUTHOR
-    $B;T@n(B $B;j(B ichikawa@flab.fujitsu.co.jp (was ichikawa@fujitsu.JUNET)
-    $B2OLn(B $B??<#(B kono@ie.u-ryukyu.acjp
+    »ÔÀî »ê ichikawa@flab.fujitsu.co.jp (was ichikawa@fujitsu.JUNET)
+    ²ÏÌî ¿¿¼£ kono@ie.u-ryukyu.acjp
     Rei FURUKAWA furukawa@tcp-ip.or.jp
-    $B@.@%(B
+    À®À¥
     mastodon
 
     http://sourceforge.jp/projects/nkf/
 
-    Copyright (C) 1987, FUJITSU LTD. (I.Ichikawa),2000 S. Kono, COW
-    Copyright (C) 2002-2006 Kono, Furukawa, Naruse, mastodon
+    Copyright (C) 1987, FUJITSU LTD. (I.Ichikawa).
+
+    Copyright (C) 1996-2009, The nkf Project.
 

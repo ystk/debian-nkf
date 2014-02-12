@@ -1,9 +1,10 @@
 Source: nkf
 Section: text
 Priority: optional
-Build-Depends: debhelper, perl (>= 5.8.0)
+Build-Depends: debhelper (>= 8)
+Build-Depends-Indep: perl
 Maintainer: NOKUBI Takatsugu <knok@daionet.gr.jp>
-Standards-Version: 3.6.0
+Standards-Version: 3.9.2
 
 Package: nkf
 Architecture: any
@@ -14,6 +15,7 @@ Description: Network Kanji code conversion Filter
  kanji code such as 7-bit JIS, MS-kanji (Shifted-JIS) or EUC.
 
 Package: libnkf-perl
+Section: perl
 Architecture: any
 Depends: ${shlibs:Depends}, ${perl:Depends}
 Description: Network Kanji code conversion Filter for Perl

@@ -1,15 +1,15 @@
 /* nkf32.dll nfk32dll.c */
-// e-mail:tkaneto@nifty.com
-// URL: http://www1.ttcn.ne.jp/~kaneto
+/* e-mail:tkaneto@nifty.com */
+/* URL: http://www1.ttcn.ne.jp/~kaneto */
 
 /*WIN32DLL*/
-/* $B$3$A$i$N%P!<%8%g%s$b99?7$7$F$/$@$5$$!#(B */
-#define NKF_VERSIONW L"2.0.7"
-/* NKF_VERSION $B$N%o%$%IJ8;z(B */
-#define DLL_VERSION   "2.0.7.0 1"
-/* DLL$B$,JV$9(B */
-#define DLL_VERSIONW L"2.0.7.0 1"
-/* DLL$B$,JV$9(B DLL_VERSION $B$N%o%$%IJ8;z(B */
+/* ‚±‚¿‚ç‚Ìƒo[ƒWƒ‡ƒ“‚àXV‚µ‚Ä‚­‚¾‚³‚¢B */
+#define NKF_VERSIONW L"2.1.2"
+/* NKF_VERSION ‚ÌƒƒCƒh•¶Žš */
+#define DLL_VERSION   "2.1.2.0 2"
+/* DLL‚ª•Ô‚· */
+#define DLL_VERSIONW L"2.1.2.0 2"
+/* DLL‚ª•Ô‚· DLL_VERSION ‚ÌƒƒCƒh•¶Žš */
 
 /* nkf32.dll main */
 #include <windows.h>
@@ -53,7 +53,7 @@ wchar_t *guessbuffW = NULL;
 UINT guessCodePage = CP_OEMCP;
 DWORD guessdwFlags = MB_PRECOMPOSED;
 
-wchar_t *tounicode(char *p)
+wchar_t *tounicode(const char *p)
 {
 static wchar_t buff[GUESS];
     int sts;
@@ -93,21 +93,21 @@ int dllprintf(FILE *fp,char *fmt,...)
 /** Network Kanji Filter. (PDS Version)
 ************************************************************************
 ** Copyright (C) 1987, Fujitsu LTD. (Itaru ICHIKAWA)
-** $BO"Mm@h!'(B $B!J3t!KIY;NDL8&5f=j!!%=%U%H#38&!!;T@n!!;j(B 
-** $B!J(BE-Mail Address: ichikawa@flab.fujitsu.co.jp$B!K(B
+** ˜A—æF iŠ”j•xŽm’ÊŒ¤‹†Š@ƒ\ƒtƒg‚RŒ¤@Žsì@ŽŠ 
+** iE-Mail Address: ichikawa@flab.fujitsu.co.jpj
 ** Copyright (C) 1996,1998
 ** Copyright (C) 2002
-** $BO"Mm@h!'(B $BN05eBg3X>pJs9)3X2J(B $B2OLn(B $B??<#(B  mime/X0208 support
-** $B!J(BE-Mail Address: kono@ie.u-ryukyu.ac.jp$B!K(B
-** $BO"Mm@h!'(B COW for DOS & Win16 & Win32 & OS/2
-** $B!J(BE-Mail Address: GHG00637@niftyserve.or.p$B!K(B
+** ˜A—æF —®‹…‘åŠwî•ñHŠw‰È ‰Í–ì ^Ž¡  mime/X0208 support
+** iE-Mail Address: kono@ie.u-ryukyu.ac.jpj
+** ˜A—æF COW for DOS & Win16 & Win32 & OS/2
+** iE-Mail Address: GHG00637@niftyserve.or.pj
 **
-**    $B$3$N%=!<%9$N$$$+$J$kJ#<L!$2~JQ!$=$@5$b5vBz$7$^$9!#$?$@$7!"(B
-**    $B$=$N:]$K$O!"C/$,9W8%$7$?$r<($9$3$NItJ,$r;D$9$3$H!#(B
-**    $B:FG[I[$d;(;o$NIUO?$J$I$NLd$$9g$o$;$bI,MW$"$j$^$;$s!#(B
-**    $B1DMxMxMQ$b>e5-$KH?$7$J$$HO0O$G5v2D$7$^$9!#(B
-**    $B%P%$%J%j$NG[I[$N:]$K$O(Bversion message$B$rJ]B8$9$k$3$H$r>r7o$H$7$^$9!#(B
-**    $B$3$N%W%m%0%i%`$K$D$$$F$OFC$K2?$NJ]>Z$b$7$J$$!"0-$7$+$i$:!#(B
+**    ‚±‚Ìƒ\[ƒX‚Ì‚¢‚©‚È‚é•¡ŽÊC‰ü•ÏCC³‚à‹–‘ø‚µ‚Ü‚·B‚½‚¾‚µA
+**    ‚»‚ÌÛ‚É‚ÍA’N‚ªvŒ£‚µ‚½‚ðŽ¦‚·‚±‚Ì•”•ª‚ðŽc‚·‚±‚ÆB
+**    Ä”z•z‚âŽGŽ‚Ì•t˜^‚È‚Ç‚Ì–â‚¢‡‚í‚¹‚à•K—v‚ ‚è‚Ü‚¹‚ñB
+**    ‰c—˜—˜—p‚àã‹L‚É”½‚µ‚È‚¢”ÍˆÍ‚Å‹–‰Â‚µ‚Ü‚·B
+**    ƒoƒCƒiƒŠ‚Ì”z•z‚ÌÛ‚É‚Íversion message‚ð•Û‘¶‚·‚é‚±‚Æ‚ððŒ‚Æ‚µ‚Ü‚·B
+**    ‚±‚ÌƒvƒƒOƒ‰ƒ€‚É‚Â‚¢‚Ä‚Í“Á‚É‰½‚Ì•ÛØ‚à‚µ‚È‚¢Aˆ«‚µ‚©‚ç‚¸B
 **
 **    Everyone is permitted to do anything on this program 
 **    including copying, modifying, improving,
@@ -127,8 +127,8 @@ int
 std_getc(f)
 FILE *f;
 {
-    if (std_gc_ndx){
-        return std_gc_buf[--std_gc_ndx];
+    if (!nkf_buf_empty_p(nkf_state->std_gc_buf)) {
+        return nkf_buf_pop(nkf_state->std_gc_buf);
     } else {
         if ( std_getc_mode == 1 ) {
             return getc(f);
@@ -182,14 +182,7 @@ void
 print_guessed_code (filename)
     char *filename;
 {
-    char *codename = "BINARY";
-    if (!is_inputcode_mixed) {
-        if (strcmp(input_codename, "") == 0) {
-            codename = "ASCII";
-        } else {
-            codename = input_codename;
-        }
-    }
+    const char *codename = get_guessed_code();
     if (filename != NULL) {
         guessbuffA = realloc(guessbuffA,(strlen(filename) + GUESS + 1) * sizeof (char) );
         sprintf(guessbuffA,"%s:%s", filename,codename);
@@ -204,26 +197,22 @@ void
 print_guessed_codeW (filename)
     wchar_t *filename;
 {
-    char *codename = "BINARY";
-    if (!is_inputcode_mixed) {
-        if (strcmp(input_codename, "") == 0) {
-            codename = "ASCII";
-        } else {
-            codename = input_codename;
-        }
-    }
+    const char *codename = get_guessed_code();
+    size_t size;
     if (filename != NULL) {
-        guessbuffW = realloc(guessbuffW,(wcslen(filename) + GUESS + 1) * sizeof (wchar_t) );
-        swprintf(guessbuffW,L"%s:%s",filename,tounicode(codename));
+	size = (wcslen(filename) + GUESS + 1) * sizeof (wchar_t);
+	guessbuffW = realloc(guessbuffW, size);
+	_snwprintf(guessbuffW, size, L"%s:%s", filename, tounicode(codename));
     } else {
-        guessbuffW = realloc(guessbuffW,(GUESS + 1) * sizeof (wchar_t));
-        swprintf(guessbuffW,L"%s",tounicode(codename));
+	size = (GUESS + 1) * sizeof (wchar_t);
+	guessbuffW = realloc(guessbuffW, size);
+	_snwprintf(guessbuffW, size, L"%s", tounicode(codename));
     }
 }
 #endif /*UNICODESUPPORT*/
 
 /**
- ** $B%Q%C%A@):n<T(B
+ ** ƒpƒbƒ`§ìŽÒ
  **  void@merope.pleiades.or.jp (Kusakabe Youichi)
  **  NIDE Naoyuki <nide@ics.nara-wu.ac.jp>
  **  ohta@src.ricoh.co.jp (Junn Ohta)
@@ -236,8 +225,8 @@ print_guessed_codeW (filename)
  **
  **/
 
-void 
-reinitdll()
+void
+reinitdll(void)
 {
     cin = NULL;
     nin = -1;
@@ -331,27 +320,38 @@ BOOL WINAPI GetNkfVersionSafeW(LPWSTR verStr,DWORD nBufferLength /*in TCHARs*/,L
 #endif /*UNICODESUPPORT*/
 }
 
-int CALLBACK SetNkfOption(LPCSTR optStr)
+static LPSTR optStr0 = NULL;
+
+int CALLBACK SetNkfOption(LPSTR optStr)
 {
     LPSTR p;
+    int len;
 
     if ( *optStr == '-' ) {
-        reinit();
-        options(optStr);
+        len = strlen(optStr) + 1;
+        p = realloc(optStr0,len);
+        strcpy(p,optStr);
     } else {
-        p = malloc(strlen(optStr) + 2);
-        if ( p == NULL ) return -1;
+        len = strlen(optStr) + 2;
+        p = realloc(optStr0,len);
         *p = '-';
         strcpy(p + 1,optStr);
-        reinit();
-        options(p);
-        free(p);
     }
+    optStr0 = p;
     return 0;
+}
+
+void options0(void)
+{
+    reinit();
+    if ( optStr0 != NULL ) {
+        options(optStr0);
+    }
 }
 
 void CALLBACK NkfConvert(LPSTR outStr, LPCSTR inStr)
 {
+    options0();
     std_putc_mode = 2;
     cout = outStr;
     noutmax = -1;
@@ -366,6 +366,7 @@ void CALLBACK NkfConvert(LPSTR outStr, LPCSTR inStr)
 
 BOOL WINAPI NkfConvertSafe(LPSTR outStr,DWORD nOutBufferLength /*in Bytes*/,LPDWORD lpBytesReturned /*in Bytes*/, LPCSTR inStr,DWORD nInBufferLength /*in Bytes*/){
     if ( inStr == NULL ) return FALSE;
+    options0();
     std_putc_mode = 6;
     cout = outStr;
     noutmax = nOutBufferLength;
@@ -389,7 +390,6 @@ void CALLBACK ToHankaku(LPSTR inStr)
     p = malloc(len);
     if ( p == NULL ) return;
     memcpy(p,inStr,len);
-    reinit();
     options("-ZSs");
     NkfConvert(inStr,p);
     free(p);
@@ -397,34 +397,29 @@ void CALLBACK ToHankaku(LPSTR inStr)
 
 BOOL WINAPI ToHankakuSafe(LPSTR outStr,DWORD nOutBufferLength /*in Bytes*/,LPDWORD lpBytesReturned /*in Bytes*/,LPCSTR inStr,DWORD nInBufferLength /*in Bytes*/)
 {
-    reinit();
     options("-ZSs");
     return NkfConvertSafe(outStr,nOutBufferLength,lpBytesReturned,inStr,nInBufferLength);
 }
 
 void CALLBACK ToZenkakuKana(LPSTR outStr, LPCSTR inStr)
 {
-    reinit();
     options("-Ss");
     NkfConvert(outStr, inStr);
 }
 
 BOOL WINAPI ToZenkakuKanaSafe(LPSTR outStr,DWORD nOutBufferLength /*in Bytes*/,LPDWORD lpBytesReturned /*in Bytes*/,LPCSTR inStr,DWORD nInBufferLength /*in Bytes*/)
 {
-    reinit();
     options("-Ss");
     return NkfConvertSafe(outStr,nOutBufferLength,lpBytesReturned,inStr,nInBufferLength);
 }
 
 void CALLBACK EncodeSubject(LPSTR outStr ,LPCSTR inStr){
-    reinit();
     options("-jM");
     NkfConvert(outStr, inStr);
 }
 
 BOOL WINAPI EncodeSubjectSafe(LPSTR outStr,DWORD nOutBufferLength /*in Bytes*/,LPDWORD lpBytesReturned /*in Bytes*/,LPCSTR inStr,DWORD nInBufferLength /*in Bytes*/)
 {
-    reinit();
     options("-jM");
     return NkfConvertSafe(outStr,nOutBufferLength,lpBytesReturned,inStr,nInBufferLength);
 }
@@ -440,10 +435,10 @@ void CALLBACK ToMime(LPSTR outStr ,LPCSTR inStr)
 int CALLBACK NkfGetKanjiCode(VOID)
 {
     int iCode=0;
-    //if(iconv == s_iconv)iCode=0; /* 0:$B%7%U%H(BJIS */
+    /* if(iconv == s_iconv)iCode=0; */ /* 0:ƒVƒtƒgJIS */
     if(iconv == w_iconv)iCode=3; /* UTF-8 */
     else if(iconv == w_iconv16){
-        if(utf16_mode == UTF16BE_INPUT)iCode=5; /* 5:UTF-16BE */
+        if(input_endian == ENDIAN_BIG)iCode=5; /* 5:UTF-16BE */
         else iCode=4; /* 4:UTF-16LE */
     }else if(iconv == e_iconv){
         if(estab_f == FALSE)iCode=2; /* 2:ISO-2022-JP */
@@ -463,6 +458,7 @@ void CALLBACK NkfFileConvert1(LPCSTR fName)
     DWORD len;
     BOOL sts;
 
+    options0();
     len = GetTempPath(sizeof d,d);
     tempdname = malloc(len + 1);
     if ( tempdname == NULL ) return;
@@ -504,6 +500,7 @@ BOOL WINAPI NkfFileConvert1SafeA(LPCSTR fName,DWORD nBufferLength /*in TCHARs*/)
     BOOL ret;
     LPCSTR p;
 
+    options0();
     ret = FALSE;
     p = fName;
     for ( ;; ) {
@@ -556,6 +553,7 @@ BOOL WINAPI NkfFileConvert1SafeW(LPCWSTR fName,DWORD nBufferLength /*in TCHARs*/
     BOOL ret;
     LPCWSTR p;
 
+    options0();
     ret = FALSE;
     p = fName;
     for ( ;; ) {
@@ -604,6 +602,7 @@ void CALLBACK NkfFileConvert2(LPCSTR fInName,LPCSTR fOutName)
 {
     FILE *fin;
 
+    options0();
     if ((fin = fopen(fInName, "rb")) == NULL) return;
     if((fout=fopen(fOutName, "wb")) == NULL) {
         fclose(fin);
@@ -630,6 +629,7 @@ BOOL WINAPI NkfFileConvert2SafeA(LPCSTR fInName,DWORD fInBufferLength /*in TCHAR
     BOOL ret;
     LPCSTR p;
 
+    options0();
     ret = FALSE;
     p = fInName;
     for ( ;; ) {
@@ -672,6 +672,7 @@ BOOL WINAPI NkfFileConvert2SafeW(LPCWSTR fInName,DWORD fInBufferLength /*in TCHA
     BOOL ret;
     LPCWSTR p;
 
+    options0();
     ret = FALSE;
     p = fInName;
     for ( ;; ) {
@@ -756,7 +757,7 @@ BOOL WINAPI GetNkfSupportFunctions(void *outStr,DWORD nBufferLength /*in Bytes*/
 {
     *lpBytesReturned = sizeof NkfSupportFunctions;
     if ( outStr == NULL || nBufferLength == 0 ) return FALSE;
-    NkfSupportFunctions.copyrightA = CopyRight;
+    NkfSupportFunctions.copyrightA = COPY_RIGHT;
     memcpy(outStr,&NkfSupportFunctions,sizeof NkfSupportFunctions > nBufferLength ? nBufferLength : sizeof NkfSupportFunctions);
     return TRUE;
 }
@@ -781,7 +782,7 @@ unsigned char buff[65536];
 unsigned char buff2[65536];
 unsigned char buff3[65536];
 unsigned char buff4[65536];
-char *code[] = {"$B%7%U%H(BJIS","EUC","ISO-2022-JP","UTF-8","UTF-16LE","UTF-16BE"};
+char *code[] = {"ƒVƒtƒgJIS","EUC","ISO-2022-JP","UTF-8","UTF-16LE","UTF-16BE"};
 
     int n;
     BOOL sts;
