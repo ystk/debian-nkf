@@ -1,0 +1,2 @@
+add-ldflags
+nkf.1j-fix-broken-code.patch

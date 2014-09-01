@@ -5,9 +5,11 @@ SHAR = shar
 # SHAR = shar -T
 PERL = perl
 RM = rm -rf
-VERSION = 2.1.2
+VERSION = 2.1.3
 MKDIR = mkdir
 prefix = /usr/local
+PYTHON2 = python
+PYTHON3 = python
 
 .PHONY: clean install test tar shar
 
@@ -32,6 +34,14 @@ perl:
 	$(PERL) Makefile.PL  ; \
 	make ; \
 	make test )
+
+python2:
+	( cd NKF.python2 ; \
+	$(PYTHON2) setup.py build )
+
+python3:
+	( cd NKF.python3 ; \
+	$(PYTHON3) setup.py build )
 
 install:
 	-$(MKDIR) $(prefix)/bin

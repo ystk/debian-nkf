@@ -1,0 +1,17 @@
+Description: Add LDFLAGS in Makefile
+ The upstream Makefile don't support LDFLAGS option. It is required
+ to build with hardening format.
+Author: NOKUBI Takatsugu <knok@daionet.gr.jp>
+Last-Update: 2013-12-19
+
+--- nkf-2.13.orig/Makefile
++++ nkf-2.13/Makefile
+@@ -14,7 +14,7 @@ PYTHON3 = python
+ .PHONY: clean install test tar shar
+ 
+ nkf : nkf.o utf8tbl.o
+-	$(CC) $(CFLAGS) -o nkf nkf.o utf8tbl.o
++	$(CC) $(CFLAGS) $(LDFLAGS) -o nkf nkf.o utf8tbl.o
+ 
+ nkf.o : nkf.c nkf.h utf8tbl.h config.h
+ 	$(CC) $(CFLAGS) -c nkf.c

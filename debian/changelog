@@ -1,9 +1,28 @@
-nkf (2.12-1) unstable; urgency=low
+nkf (2.13-3) unstable; urgency=medium
 
-  * New upstream release
-  * Change debhelper version 5 to 8.
+  * Use buildflags.mk, closes: #753139.
 
- -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Fri, 29 Jun 2012 13:20:56 +0900
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Mon, 30 Jun 2014 08:44:09 +0000
+
+nkf (2.13-2) unstable; urgency=low
+
+  * Changed debian/rules format to dh7.
+  * Import nkf.1j from git c778b37, closes: #752736.
+    http://sourceforge.jp/ticket/browse.php?group_id=248&tid=32546
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Mon, 30 Jun 2014 08:43:56 +0000
+
+nkf (2.13-1) unstable; urgency=low
+
+  * New upstream.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Tue, 26 Nov 2013 15:53:35 +0900
+
+nkf (2.11-2) unstable; urgency=low
+
+  * Fixed perl package bug, closes: #627369.
+
+ --  <knok@daionet.gr.jp>  Wed, 18 May 2011 06:13:19 +0000
 
 nkf (2.11-1) unstable; urgency=low
 
