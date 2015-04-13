@@ -7,10 +7,7 @@
 # This has to be exported to make some magic below work.
 export DH_OPTIONS
 
-DPKG_EXPORT_BUILDFLAGS = 1
-include /usr/share/dpkg/buildflags.mk
-
-CFLAGS=$(shell dpkg-buildflags --get CFLAGS)
+CFLAGS=$(shell dpkg-buildflags --get CFLAGS) $(shell dpkg-buildflags --get CPPFLAGS)
 LDFLAGS=$(shell dpkg-buildflags --get LDFLAGS)
 CFLAGS+=$(HARDENING_CFLAGS)
 LDFLAGS+=$(HARDENING_LDFLAGS)
@@ -43,11 +40,15 @@ override_dh_auto_clean:
 
 override_dh_auto_configure:
 	(cd NKF.mod && \
-	/usr/bin/perl Makefile.PL INSTALLDIRS=vendor)
+	/usr/bin/perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="$(CFLAGS)" LD="cc $(LDFLAGS)")
 
 override_dh_auto_build:
 	make nkf CC=cc CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)"
-	(cd NKF.mod && make CCFLAGS="$(CFLAGS)" LDDFLAGS="$(LDFLAGS)")
+	(cd NKF.mod && make)
+
+override_dh_auto_test:
+	make test
+	make -C NKF.mod test
 
 override_dh_auto_install:
 	install -s -m 755 nkf debian/nkf/usr/bin

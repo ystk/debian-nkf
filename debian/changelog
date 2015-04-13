@@ -1,3 +1,10 @@
+nkf (2.13-4) unstable; urgency=low
+
+  * Fix CFLAGS value handling closes: #759766,
+    Thank you Nobuhiro Ban and Niko Tyni.
+
+ -- NOKUBI Takatsugu <knok@daionet.gr.jp>  Mon, 01 Sep 2014 15:37:25 +0900
+
 nkf (2.13-3) unstable; urgency=medium
 
   * Use buildflags.mk, closes: #753139.
